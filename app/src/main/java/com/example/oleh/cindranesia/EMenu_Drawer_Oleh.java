@@ -38,7 +38,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
 
     int textlength = 0;
 
-    SearchView search;
+    SearchView searchKota;
 
     public EMenu_Drawer_Oleh() {
         // Required empty public constructor
