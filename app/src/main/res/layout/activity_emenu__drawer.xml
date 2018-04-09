@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.oleh.cindranesia.EMenu_Drawer">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/sidebar1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:title="Beranda"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark">
+            </android.support.v7.widget.Toolbar>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabberuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabTextColor="#cdcdcd"
+                android:layout_below="@+id/tool"
+                app:tabSelectedTextColor="@color/colorPrimary">
+            </android.support.design.widget.TabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpberuser"
+                android:layout_below="@+id/tabberuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v4.view.ViewPager>
+        </RelativeLayout>
+
+        <android.support.design.widget.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/view1"
+            android:layout_gravity="start"
+            app:itemIconTint="@color/colorPrimary"
+            app:itemTextColor="@color/colorPrimary"
+            app:menu="@menu/menu_user"
+            app:headerLayout="@layout/activity_menu_user" />
+
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

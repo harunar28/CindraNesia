@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.oleh.cindranesia.EMenu_Drawer_Populer">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/grid_user_populer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="1"
+                android:padding="5dp">
+
+            </GridView>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

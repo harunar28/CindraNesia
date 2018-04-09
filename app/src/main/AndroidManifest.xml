@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.oleh.cindranesia">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ASplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".BIntro" />
+        <activity android:name=".CLogin" />
+        <activity android:name=".DDaftar" />
+        <activity android:name=".EMenu_Drawer" />
+        <activity android:name=".FBeranda_Owner" />
+        <activity android:name=".EMenu_Owner" />
+        <activity android:name=".FDetail_Oleh" />
+        <activity android:name=".ItemProduk" />
+        <activity android:name=".FFavorit_User" />
+        <activity android:name=".FKeranjang_User" />
+        <activity android:name=".FRiwayat_User" />
+        <activity android:name=".GProfil" />
+        <activity android:name=".ItemFavorit" />
+        <activity android:name=".FDetail_User" />
+        <activity android:name=".FPemesanan_Owner"></activity>
+    </application>
+
+</manifest>

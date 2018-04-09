@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu1"
+        android:icon="@drawable/home_merah"
+        android:title="Beranda">
+    </item>
+    <item android:id="@+id/menu2"
+        android:icon="@drawable/inbox"
+        android:title="Pemesanan">
+    </item>
+    <item
+        android:id="@+id/menu3"
+        android:icon="@drawable/tentang"
+        android:title="Tentang">
+    </item>
+    <item
+        android:id="@+id/menu4"
+        android:icon="@drawable/keluar"
+        android:title="Keluar">
+    </item>
+</menu>

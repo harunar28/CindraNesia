@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/kotaklogin">
+
+
+                <ImageView
+                    android:id="@+id/gambar"
+                    android:layout_width="350dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/bakpia" />
+
+                <TextView
+                    android:id="@+id/judul_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/gambar"
+                    android:layout_marginTop="5dp"
+                    android:text="Bakpia"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_below="@+id/judul_produk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Nama Toko"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_below="@+id/judul_produk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text=":"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/txt1"/>
+                <TextView
+                    android:id="@+id/nama_toko"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/judul_produk"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/txt2"
+                    android:text="Bakpia 145 Ibu Sri Astuti"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="8dp"/>
+
+                <TextView
+                    android:id="@+id/txt3"
+                    android:layout_below="@+id/txt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Alamat Toko"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txt4"
+                    android:layout_below="@+id/nama_toko"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="5dp"
+                    android:text=":"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/txt3"/>
+                <TextView
+                    android:id="@+id/alamat_toko"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nama_toko"
+                    android:layout_marginTop="5dp"
+                    android:text="Jl. Kusumanegara No.151, Muja Muju, Umbulharjo"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/txt3"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt5"
+                    android:layout_below="@+id/txt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Kota Toko"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txt6"
+                    android:layout_below="@+id/txt3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="20dp"
+                    android:text=":"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/txt5"/>
+                <TextView
+                    android:id="@+id/kota_toko"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/alamat_toko"
+                    android:layout_marginTop="5dp"
+                    android:text="Yogyakarta"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt6"/>
+
+                <TextView
+                    android:id="@+id/txt7"
+                    android:layout_below="@+id/txt5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Jenis Produk"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txt8"
+                    android:layout_below="@+id/txt6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="5dp"
+                    android:text=":"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/txt7"/>
+                <TextView
+                    android:id="@+id/jenis_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/kota_toko"
+                    android:layout_marginTop="5dp"
+                    android:text="Makanan"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/txt8"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
