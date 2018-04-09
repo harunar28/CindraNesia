@@ -13,18 +13,22 @@ public class BIntro extends AppIntro {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(AppIntroFragment.newInstance("Langkah 1",
-                "Apa itu",
+        addSlide(AppIntroFragment.newInstance("CindraNesia",
+                "Aplikasi yang memiliki konten - konten tentang " +
+                        "cendramata Indonesia. Aplikasi ini menjadi " +
+                        "media promosi bagi mikro usaha yang sedang " +
+                        "menjalankan usaha berupa oleh - oleh khas Indonesia.",
                 R.drawable.logo_tulisan,
                 Color.parseColor("#51e2b7")));
 
-        addSlide(AppIntroFragment.newInstance("Langkah 2",
-                "Apa itu",
+        addSlide(AppIntroFragment.newInstance("Cari CenderaMata",
+                "Cari cenderamata Indonesia hanya dengan satu " +
+                        "ketukan dan dapat melihat semua jenis cenderamata indonesia.",
                 R.drawable.logo_tulisan,
                 Color.parseColor("#8c50e3")));
 
-        addSlide(AppIntroFragment.newInstance("Langkah 3",
-                "Apa Itu",
+        addSlide(AppIntroFragment.newInstance("Pesan Cenderamata",
+                "Hanya dengan satu ketukan Anda dapat memesan cenderamata Indonesia.",
                 R.drawable.logo_tulisan,
                 Color.parseColor("#4fd7ff")));
 

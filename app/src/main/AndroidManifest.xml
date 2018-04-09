@@ -28,7 +28,6 @@
         <activity android:name=".CLogin" />
         <activity android:name=".DDaftar" />
         <activity android:name=".EMenu_Drawer" />
-        <activity android:name=".FBeranda_Owner" />
         <activity android:name=".EMenu_Owner" />
         <activity android:name=".FDetail_Oleh" />
         <activity android:name=".ItemProduk" />

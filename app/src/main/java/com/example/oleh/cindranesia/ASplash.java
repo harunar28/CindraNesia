@@ -19,7 +19,7 @@ public class ASplash extends AppCompatActivity {
         ImageView lg = (ImageView) findViewById(R.id.logo);
 
         AlphaAnimation animasi = new AlphaAnimation(0.0f, 1.0f);
-        animasi.setDuration(3000);
+        animasi.setDuration(3500);
         animasi.setStartOffset(1000);
         lg.startAnimation(animasi);
 
