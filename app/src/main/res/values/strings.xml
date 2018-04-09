@@ -5,4 +5,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    //Filter
+    <string-array name="filter">
+        <item>Jenis Produk</item>
+        <item>Kota</item>
+        <item>Nama Produk</item>
+        <item>Nama Toko</item>
+    </string-array>
 </resources>
