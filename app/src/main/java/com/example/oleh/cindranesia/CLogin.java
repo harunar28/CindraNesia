@@ -47,7 +47,7 @@ public class CLogin extends AppCompatActivity {
                 us = user.getText().toString();
                 ps = pass.getText().toString();
                 if(JsonUtils.isNetworkAvailable(CLogin.this)){
-                    new Tampil().execute("http://192.168.56.10/android/cindranesia/login.php?user="+us+"&pass="+ps);
+                    new Tampil().execute("https://cindranesia.000webhostapp.com/login.php?user="+us+"&pass="+ps);
                 }else{
                     new AlertDialog.Builder(CLogin.this)
                             .setTitle("Failed")

@@ -61,7 +61,7 @@ public class FFavorit_User extends AppCompatActivity {
         arrayjenis_produk = new String[alljenis_produk.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampiloleh.php");
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
