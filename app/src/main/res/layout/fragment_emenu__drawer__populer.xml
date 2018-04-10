@@ -1,18 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.oleh.cindranesia.EMenu_Drawer_Populer">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
             <GridView
                 android:id="@+id/grid_user_populer"
@@ -20,9 +15,16 @@
                 android:layout_height="wrap_content"
                 android:numColumns="1"
                 android:padding="5dp">
-
             </GridView>
-        </LinearLayout>
-    </ScrollView>
 
-</FrameLayout>
+    <ProgressBar
+        android:id="@+id/progbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

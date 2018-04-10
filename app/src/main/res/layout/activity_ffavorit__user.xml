@@ -16,23 +16,24 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:title="Favorit"></android.support.v7.widget.Toolbar>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <GridView
+        android:id="@+id/grid_user_favorit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="1"
+        android:padding="5dp"></GridView>
 
-            <GridView
-                android:id="@+id/grid_user_favorit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="1"
-                android:padding="5dp"></GridView>
-        </LinearLayout>
-    </ScrollView>
+    <ProgressBar
+        android:id="@+id/progbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+    </RelativeLayout>
 
 </LinearLayout>

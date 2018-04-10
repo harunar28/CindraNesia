@@ -5,21 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.oleh.cindranesia.FPemesanan_Owner">
+    tools:context="com.example.oleh.cindranesia.FTentang">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolpemesanan"
+        android:id="@+id/tooltentang"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:title="Pemesanan"></android.support.v7.widget.Toolbar>
-
-            <GridView
-                android:id="@+id/grid_pemesanan_owner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="1"
-                android:padding="5dp"></GridView>
+        app:title="Tentang"></android.support.v7.widget.Toolbar>
 
 </LinearLayout>

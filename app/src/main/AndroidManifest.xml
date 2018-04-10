@@ -37,7 +37,8 @@
         <activity android:name=".GProfil" />
         <activity android:name=".ItemFavorit" />
         <activity android:name=".FDetail_User" />
-        <activity android:name=".FPemesanan_Owner"></activity>
+        <activity android:name=".FPemesanan_Owner" />
+        <activity android:name=".FTentang"></activity>
     </application>
 
 </manifest>

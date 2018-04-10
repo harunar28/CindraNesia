@@ -5,17 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-public class FPemesanan_Owner extends AppCompatActivity {
+public class FTentang extends AppCompatActivity {
 
     Toolbar tb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fpemesanan__owner);
+        setContentView(R.layout.activity_ftentang);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.toolfavorit);
+        tb = (Toolbar) findViewById(R.id.tooltentang);
         setSupportActionBar(tb);
 
         //back-toolbar

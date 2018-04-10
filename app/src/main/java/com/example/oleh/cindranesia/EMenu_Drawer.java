@@ -56,19 +56,23 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu1:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu2:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FFavorit_User.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu3:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FKeranjang_User.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu4:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FRiwayat_User.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu5:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FTentang.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu6:
                 //Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show()

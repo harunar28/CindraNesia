@@ -25,13 +25,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
             <GridView
                 android:id="@+id/grid_user_keranjang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="1"
                 android:padding="5dp"></GridView>
-
+    <ProgressBar
+        android:id="@+id/progbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+    </RelativeLayout>
             <Button
                 android:id="@+id/btn_pesan"
                 android:layout_width="match_parent"
@@ -43,6 +54,4 @@
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

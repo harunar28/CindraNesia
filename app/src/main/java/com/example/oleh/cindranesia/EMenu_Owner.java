@@ -1,6 +1,7 @@
 package com.example.oleh.cindranesia;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -41,13 +42,15 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu1:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu2:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FPemesanan_Owner.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu3:
-                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FTentang.class));
+//                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu4:
                 new AlertDialog.Builder(this).setMessage("Apakah Anda yakin?")
