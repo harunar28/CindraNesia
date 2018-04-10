@@ -118,10 +118,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/esti"
-                    android:layout_toRightOf="@id/namaharun"
                     android:text="Esti Rosmana"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_marginLeft="130dp"/>
             </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -130,7 +130,8 @@
                 android:gravity="center"
                 android:text="Politeknik Negeri Jakarta"
                 android:textColor="@color/colorPrimary"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:layout_marginBottom="30dp"/>
 
         </LinearLayout>
     </ScrollView>

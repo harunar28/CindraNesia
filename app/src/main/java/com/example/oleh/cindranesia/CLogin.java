@@ -4,10 +4,9 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.design.widget.TextInputEditText;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,7 +119,7 @@ public class CLogin extends AppCompatActivity {
                         JsonObj = jsonArray.getJSONObject(0);
 
                         final String roll = JsonObj.getString("role");
-                        final String id = JsonObj.getString("id");
+                        final String id_user = JsonObj.getString("id_user");
 
                         if (roll.equals("user")){
                             new AlertDialog.Builder(CLogin.this)
