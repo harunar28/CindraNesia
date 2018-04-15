@@ -72,7 +72,7 @@ public class CLogin extends AppCompatActivity {
             super.onPreExecute();
 
             pDialog = new ProgressDialog(CLogin.this);
-            pDialog.setMessage("Loading...");
+            pDialog.setMessage("Harap Tunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
         }

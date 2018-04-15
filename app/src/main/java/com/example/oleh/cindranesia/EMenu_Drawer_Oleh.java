@@ -110,7 +110,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Jenis Oleh - Oleh")
+                        .setTitle("Cari Berdasarkan")
                         .setItems(R.array.filter, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
