@@ -92,6 +92,7 @@ public class DDaftar_Owner extends Fragment {
                 nosurat = no_surat.getText().toString();
 
                 new daftar().execute();
+                new daftartoko().execute();
 
             }
         });
@@ -121,7 +122,7 @@ public class DDaftar_Owner extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            Result = getDaftar(nl,uname,mail,pass,notelp,nt,nosurat);
+            Result = getDaftar(nl,uname,mail,pass,notelp);
             return null;
         }
 
@@ -143,7 +144,7 @@ public class DDaftar_Owner extends Fragment {
         }
     }
 
-    public String getDaftar(String nama_lengkap, String username, String email, String password, String no_telp, String nama_toko, String no_surat){
+    public String getDaftar(String nama_lengkap, String username, String email, String password, String no_telp){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
@@ -155,6 +156,58 @@ public class DDaftar_Owner extends Fragment {
             nvp.add(new BasicNameValuePair("email",email));
             nvp.add(new BasicNameValuePair("password",password));
             nvp.add(new BasicNameValuePair("no_telp",no_telp));
+            request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
+            HttpResponse response = client.execute(request);
+            result = request(response);
+
+        }catch (Exception ex){
+            result = "Unable To connect";
+        }
+
+        return result;
+    }
+
+    public class daftartoko extends AsyncTask<Void, Void, Void> {
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+//            dialog = ProgressDialog.show(getActivity(),"","Harap Tunggu...",true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            Result = getDaftarToko(nt,nosurat);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            dialog.dismiss();
+            resultDaftarToko(Result);
+        }
+    }
+
+    public void resultDaftarToko(String HasilProses){
+        if(HasilProses.trim().equalsIgnoreCase("OK")){
+//            Toast.makeText(getActivity(), "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(getActivity(), CLogin.class));
+        }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
+//            Toast.makeText(getActivity(), "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
+        }else{
+            Log.d("HasilProses", HasilProses);
+        }
+    }
+
+    public String getDaftarToko(String nama_toko, String no_surat){
+        String result = "";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahtoko.php");
+        try{
+            List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("nama_toko",nama_toko));
             nvp.add(new BasicNameValuePair("no_surat",no_surat));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
