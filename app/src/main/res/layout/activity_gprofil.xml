@@ -8,7 +8,7 @@
     tools:context="com.example.oleh.cindranesia.GProfil">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolprofil"
+        android:id="@+id/profil_tool"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/img_profil"
+                android:id="@+id/profil_foto"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
                 android:src="@drawable/avatar" />
 
             <EditText
-                android:id="@+id/nama_profil"
+                android:id="@+id/profil_nama"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -46,7 +46,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/tempat_lahir_profil"
+                android:id="@+id/profil_tempat_lahir"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -57,7 +57,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/tgl_lahir_profil"
+                android:id="@+id/profil_tgl_lahir_"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -68,7 +68,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/jenkel_profil"
+                android:id="@+id/profil_jenkel"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -79,7 +79,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/alamat_profil"
+                android:id="@+id/profilalamat"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="20dp"
@@ -90,7 +90,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/email_profil"
+                android:id="@+id/profil_email"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -101,7 +101,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/telpon_profil"
+                android:id="@+id/profil_telpon"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -112,7 +112,7 @@
                 android:padding="10dp" />
 
             <Button
-                android:id="@+id/btn_simpan_profil"
+                android:id="@+id/profil_btn_simpan"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
@@ -124,7 +124,7 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btn_gantipass_profil"
+                android:id="@+id/profil_btn_gantipass"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
