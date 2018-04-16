@@ -11,6 +11,7 @@
         android:layout_height="80dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
+        android:id="@+id/avatar"
         android:src="@drawable/avatar" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:text="Esti Rosmana"
+        android:id="@+id/nama"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:layout_marginTop="8dp"/>
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="estiros@gmail.com"
         android:textColor="#ffffff"
+        android:id="@+id/email"
         android:textSize="16sp"
         android:layout_marginLeft="25dp"/>
 </LinearLayout>
