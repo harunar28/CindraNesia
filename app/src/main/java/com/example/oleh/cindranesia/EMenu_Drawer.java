@@ -1,7 +1,9 @@
 package com.example.oleh.cindranesia;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,7 +18,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class EMenu_Drawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,10 +37,16 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
     ViewPager vp;
     TabLayout tl;
 
+    String id_user;
+
+    TextView nama,email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emenu__drawer);
+
+        id_user = getIntent().getExtras().getString("id");
 
         tb = (Toolbar)findViewById(R.id.tool);
         setSupportActionBar(tb);
@@ -50,6 +65,27 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         vp.setAdapter(adapter);
         tl.setupWithViewPager(vp);
+
+
+        View header = view.getHeaderView(0);
+        ImageView profile = (ImageView) header.findViewById(R.id.avatar);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(EMenu_Drawer.this, GProfil.class);
+                a.putExtra("id", id_user);
+                startActivity(a);
+            }
+        });
+
+        nama = (TextView)header.findViewById(R.id.nama);
+        email = (TextView)header.findViewById(R.id.email);
+
+        if(JsonUtils.isNetworkAvailable(EMenu_Drawer.this)){
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampildrawer.php?id_user="+id_user);
+        }else{
+            Toast.makeText(EMenu_Drawer.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -89,6 +125,59 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
         }
         dl.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public class Tampil extends AsyncTask<String, Void, String> {
+        ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(EMenu_Drawer.this);
+            pDialog.setMessage("Loading...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return JsonUtils.getJSONString(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String hasil) {
+            super.onPostExecute(hasil);
+
+            if (null != pDialog && pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+
+            if (null == hasil || hasil.length() == 0) {
+                Toast.makeText(EMenu_Drawer.this, "Tidak Ada data!!!", Toast.LENGTH_SHORT).show();
+            } else {
+                try {
+                    JSONObject JsonUtama = new JSONObject(hasil);
+                    JSONArray jsonArray = JsonUtama.getJSONArray("data");
+                    JSONObject JsonObj = null;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JsonObj = jsonArray.getJSONObject(i);
+
+                        nama.setText(JsonObj.getString("nama_lengkap"));
+                        email.setText(JsonObj.getString("email"));
+
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
     }
 
     class MyAdapter extends FragmentStatePagerAdapter {
