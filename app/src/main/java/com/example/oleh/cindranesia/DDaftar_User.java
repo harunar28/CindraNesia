@@ -102,7 +102,7 @@ public class DDaftar_User extends Fragment {
 
     public void resultDaftar(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(getActivity(), "Data Tersimpan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getActivity(), CLogin.class));
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
             Toast.makeText(getActivity(), "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
