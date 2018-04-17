@@ -28,7 +28,7 @@ public class CLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clogin);
 
-        daftar = (TextView) findViewById(R.id.daftar);
+        daftar = (TextView) findViewById(R.id.login_daftar);
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,10 +36,10 @@ public class CLogin extends AppCompatActivity {
             }
         });
 
-        user = (EditText)findViewById(R.id.user);
-        pass = (EditText)findViewById(R.id.pass);
+        user = (EditText)findViewById(R.id.login_user);
+        pass = (EditText)findViewById(R.id.login_pass);
 
-        login = (Button)findViewById(R.id.btnMasuk);
+        login = (Button)findViewById(R.id.login_btnMasuk);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +142,9 @@ public class CLogin extends AppCompatActivity {
                                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(CLogin.this, EMenu_Owner.class));
+                                            Intent a = new Intent(CLogin.this, EMenu_Owner.class);
+                                            a.putExtra("id",id_user);
+                                            startActivity(a);
                                         }
                                     }).show();
                         }

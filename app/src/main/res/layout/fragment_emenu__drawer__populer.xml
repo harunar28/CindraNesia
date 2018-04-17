@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
             <GridView
-                android:id="@+id/grid_user_populer"
+                android:id="@+id/menu_drawer_populer_populer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="1"
@@ -18,7 +18,7 @@
             </GridView>
 
     <ProgressBar
-        android:id="@+id/progbar"
+        android:id="@+id/menu_drawer_populer_progbar"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

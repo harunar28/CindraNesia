@@ -8,18 +8,43 @@
     tools:context="com.example.oleh.cindranesia.FPemesanan_Owner">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolpemesanan"
+        android:id="@+id/pemesanan_owner_tool"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:title="Pemesanan"></android.support.v7.widget.Toolbar>
 
-            <GridView
-                android:id="@+id/grid_pemesanan_owner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="1"
-                android:padding="5dp"></GridView>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <GridView
+                    android:id="@+id/pemesanan_owner_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="1"
+                    android:padding="5dp"></GridView>
+
+                <ProgressBar
+                    android:id="@+id/pemesanan_owner_progbar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

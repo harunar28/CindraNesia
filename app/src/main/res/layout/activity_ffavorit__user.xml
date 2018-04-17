@@ -9,31 +9,43 @@
     tools:context="com.example.oleh.cindranesia.FFavorit_User">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolfavorit"
+        android:id="@+id/favorit_user_tool"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:title="Favorit"></android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
 
-    <GridView
-        android:id="@+id/grid_user_favorit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="1"
-        android:padding="5dp"></GridView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progbar"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <GridView
+                    android:id="@+id/favorit_user_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="1"
+                    android:padding="5dp"></GridView>
+
+                <ProgressBar
+                    android:id="@+id/favorit_user_progbar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

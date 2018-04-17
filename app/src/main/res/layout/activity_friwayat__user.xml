@@ -8,7 +8,7 @@
     tools:context="com.example.oleh.cindranesia.FRiwayat_User">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolriwayat"
+        android:id="@+id/riwayat_user_tool"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -25,27 +25,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-            <GridView
-                android:id="@+id/grid_user_riwayat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numColumns="1"
-                android:padding="5dp"></GridView>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <ProgressBar
-        android:id="@+id/progbar"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-    </RelativeLayout>
+                <GridView
+                    android:id="@+id/riwayat_user_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="1"
+                    android:padding="5dp"></GridView>
+
+                <ProgressBar
+                    android:id="@+id/riwayat_user_progbar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+            </RelativeLayout>
 
             <Button
-                android:id="@+id/btn_bersihkan_riwayat"
+                android:id="@+id/riwayat_user_btnBersihkan"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
