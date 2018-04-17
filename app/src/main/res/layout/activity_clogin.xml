@@ -19,7 +19,7 @@
         android:background="@drawable/kotaklogin">
 
         <EditText
-            android:id="@+id/user"
+            android:id="@+id/login_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -34,10 +34,10 @@
             android:textColorHint="#fff" />
 
         <EditText
-            android:id="@+id/pass"
+            android:id="@+id/login_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/user"
+            android:layout_below="@+id/login_user"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
@@ -50,10 +50,10 @@
             android:textColorHint="#fff" />
 
         <Button
-            android:id="@+id/btnMasuk"
+            android:id="@+id/login_btnMasuk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pass"
+            android:layout_below="@+id/login_pass"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
@@ -64,10 +64,10 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/daftar"
+            android:id="@+id/login_daftar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnMasuk"
+            android:layout_below="@+id/login_btnMasuk"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"

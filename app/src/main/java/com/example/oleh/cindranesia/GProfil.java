@@ -30,14 +30,14 @@ public class GProfil extends AppCompatActivity {
 
         id_user = getIntent().getExtras().getString("id");
 
-        nama = (EditText)findViewById(R.id.nama_profil);
-        tempat = (EditText)findViewById(R.id.tempat_lahir_profil);
-        tgl = (EditText)findViewById(R.id.tgl_lahir_profil);
-        jenkel = (EditText)findViewById(R.id.jenkel_profil);
-        alamat = (EditText)findViewById(R.id.alamat_profil);
-        email = (EditText)findViewById(R.id.email_profil);
-        nohp = (EditText)findViewById(R.id.telpon_profil);
-        image = (ImageButton) findViewById(R.id.img_profil);
+        nama = (EditText)findViewById(R.id.profil_nama);
+        tempat = (EditText)findViewById(R.id.profil_tempat_lahir);
+        tgl = (EditText)findViewById(R.id.profil_tgl_lahir_);
+        jenkel = (EditText)findViewById(R.id.profil_jenkel);
+        alamat = (EditText)findViewById(R.id.profil_alamat);
+        email = (EditText)findViewById(R.id.profil_email);
+        nohp = (EditText)findViewById(R.id.profil_telpon);
+        image = (ImageButton) findViewById(R.id.profil_foto);
 
         if(JsonUtils.isNetworkAvailable(GProfil.this)){
             new Tampil().execute("https://cindranesia.000webhostapp.com/tampilprofil.php?id_user="+id_user);

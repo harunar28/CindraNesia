@@ -40,6 +40,8 @@
         <activity android:name=".FPemesanan_Owner" />
         <activity android:name=".FTentang" />
         <activity android:name=".DDaftar_Owner_2"></activity>
+        <activity android:name=".ItemRiwayatUser" />
+        <activity android:name=".ItemPemesananOwner"></activity>
     </application>
 
 </manifest>

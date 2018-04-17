@@ -16,7 +16,7 @@ public class ASplash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asplash);
 
-        ImageView lg = (ImageView) findViewById(R.id.logo);
+        ImageView lg = (ImageView) findViewById(R.id.splash_logo);
 
         AlphaAnimation animasi = new AlphaAnimation(0.0f, 1.0f);
         animasi.setDuration(3500);
