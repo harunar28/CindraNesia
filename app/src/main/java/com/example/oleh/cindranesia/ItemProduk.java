@@ -6,11 +6,21 @@ import android.os.Bundle;
 public class ItemProduk extends AppCompatActivity {
 
     private String id;
+    private String idtoko;
     private String judul_produk;
     private String nama_toko;
     private String alamat_toko;
     private String kota_toko;
     private String jenis_produk;
+
+
+    public String getIdtoko() {
+        return idtoko;
+    }
+
+    public void setIdtoko(String idtoko) {
+        this.idtoko = idtoko;
+    }
 
     public String getId() {
         return id;

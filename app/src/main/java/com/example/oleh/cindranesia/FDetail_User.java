@@ -40,7 +40,7 @@ public class FDetail_User extends AppCompatActivity {
     EditText ulasan;
     Button kirim;
 
-    String iduser,idproduk;
+    String iduser,idproduk,idtoko;
     String ulas;
 
     String Result;
@@ -66,6 +66,7 @@ public class FDetail_User extends AppCompatActivity {
 
         iduser = getIntent().getExtras().getString("iduser");
         idproduk = getIntent().getExtras().getString("idproduk");
+        idtoko = getIntent().getExtras().getString("idtoko");
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
             new Tampil().execute("https://cindranesia.000webhostapp.com/tampiloleh.php?id="+idproduk);
@@ -89,7 +90,7 @@ public class FDetail_User extends AppCompatActivity {
 
                 ulas = ulasan.getText().toString();
 
-                new daftar().execute();
+                new kirim().execute();
             }
         });
 
@@ -161,8 +162,7 @@ public class FDetail_User extends AppCompatActivity {
 
 
 
-
-    public class daftar extends AsyncTask<Void, Void, Void> {
+    public class simpan extends AsyncTask<Void, Void, Void> {
         ProgressDialog dialog;
 
         @Override
@@ -174,18 +174,18 @@ public class FDetail_User extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            Result = getDaftar(iduser,idproduk,ulas);
+            Result = getSimpan(iduser,idproduk,ulas);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             dialog.dismiss();
-            resultDaftar(Result);
+            resultSimpan(Result);
         }
     }
 
-    public void resultDaftar(String HasilProses){
+    public void resultSimpan(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
             Toast.makeText(FDetail_User.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FDetail_User.this, CLogin.class));
@@ -196,7 +196,66 @@ public class FDetail_User extends AppCompatActivity {
         }
     }
 
-    public String getDaftar(String iduser, String idproduk, String ulasan){
+    public String getSimpan(String iduser, String idproduk, String ulasan){
+        String result = "";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
+        try{
+            List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
+            nvp.add(new BasicNameValuePair("id_user",iduser));
+            nvp.add(new BasicNameValuePair("id_produk",idproduk));
+            nvp.add(new BasicNameValuePair("ulasan",ulasan));
+            request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
+            HttpResponse response = client.execute(request);
+            result = request(response);
+
+        }catch (Exception ex){
+            result = "Unable To connect";
+        }
+
+        return result;
+    }
+
+
+
+    //KIRIM ULASAN
+
+    public class kirim extends AsyncTask<Void, Void, Void> {
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(FDetail_User.this,"","Harap Tunggu...",true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            Result = getKirim(iduser,idproduk,ulas);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            dialog.dismiss();
+            resultKirim(Result);
+        }
+    }
+
+    public void resultKirim(String HasilProses){
+        if(HasilProses.trim().equalsIgnoreCase("OK")){
+            Toast.makeText(FDetail_User.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(FDetail_User.this, CLogin.class));
+        }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
+            Toast.makeText(FDetail_User.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
+        }else{
+            Log.d("HasilProses", HasilProses);
+        }
+    }
+
+    public String getKirim(String iduser, String idproduk, String ulasan){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();

@@ -36,8 +36,8 @@ public class EMenu_Drawer_Oleh extends Fragment {
     List<ItemProduk> arrayItembaru;
     AdapterProduk objAdapter;
     private ItemProduk semuaItemobj;
-    ArrayList<String> allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
+    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
     ProgressBar progress;
     EditText by;
 
@@ -68,6 +68,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
         arrayItembaru = new ArrayList<ItemProduk>();
 
         allid = new ArrayList<String>();
+        allidtoko = new ArrayList<String>();
         alljudul_produk = new ArrayList<String>();
         allnama_toko = new ArrayList<String>();
         allalamat_toko = new ArrayList<String>();
@@ -75,6 +76,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
         alljenis_produk = new ArrayList<String>();
 
         arrayid = new String[allid.size()];
+        arrayidtoko = new String[allidtoko.size()];
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
         arrayalamat_toko = new String[allalamat_toko.size()];
@@ -102,7 +104,10 @@ public class EMenu_Drawer_Oleh extends Fragment {
                 semuaItemobj = arrayItembaru.get(position);
 
                 String ide = semuaItemobj.getId();
+                String idtoko = semuaItemobj.getIdtoko();
+
                 Intent a = new Intent(getActivity() ,FDetail_User.class);
+                a.putExtra("idtoko",idtoko);
                 a.putExtra("idproduk",ide);
                 a.putExtra("iduser",data);
                 startActivity(a);
@@ -154,6 +159,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 ItemProduk data = new ItemProduk();
 
                                 data.setId(arrayid[i]);
+                                data.setIdtoko(arrayidtoko[i]);
                                 data.setJudul_produk(arrayjudul_produk[i]);
                                 data.setNama_toko(arraynama_toko[i]);
                                 data.setAlamat_toko(arrayalamat_toko[i]);
@@ -174,6 +180,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 ItemProduk data = new ItemProduk();
 
                                 data.setId(arrayid[i]);
+                                data.setIdtoko(arrayidtoko[i]);
                                 data.setJudul_produk(arrayjudul_produk[i]);
                                 data.setNama_toko(arraynama_toko[i]);
                                 data.setAlamat_toko(arrayalamat_toko[i]);
@@ -194,6 +201,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 ItemProduk data = new ItemProduk();
 
                                 data.setId(arrayid[i]);
+                                data.setIdtoko(arrayidtoko[i]);
                                 data.setJudul_produk(arrayjudul_produk[i]);
                                 data.setNama_toko(arraynama_toko[i]);
                                 data.setAlamat_toko(arrayalamat_toko[i]);
@@ -214,6 +222,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 ItemProduk data = new ItemProduk();
 
                                 data.setId(arrayid[i]);
+                                data.setIdtoko(arrayidtoko[i]);
                                 data.setJudul_produk(arrayjudul_produk[i]);
                                 data.setNama_toko(arraynama_toko[i]);
                                 data.setAlamat_toko(arrayalamat_toko[i]);
@@ -288,6 +297,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                         ItemProduk buku = new ItemProduk();
 
                         buku.setId(JsonObj.getString("id_produk"));
+                        buku.setIdtoko(JsonObj.getString("id_toko"));
                         buku.setJudul_produk(JsonObj.getString("judul_produk"));
                         buku.setNama_toko(JsonObj.getString("nama_toko"));
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
@@ -309,6 +319,9 @@ public class EMenu_Drawer_Oleh extends Fragment {
 
                     allid.add(semuaItemobj.getId());
                     arrayid = allid.toArray(arrayid);
+
+                    allidtoko.add(semuaItemobj.getIdtoko());
+                    arrayidtoko = allidtoko.toArray(arrayidtoko);
 
                     alljudul_produk.add(semuaItemobj.getJudul_produk());
                     arrayjudul_produk = alljudul_produk.toArray(arrayjudul_produk);
