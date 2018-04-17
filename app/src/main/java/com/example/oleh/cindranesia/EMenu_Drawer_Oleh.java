@@ -60,13 +60,9 @@ public class EMenu_Drawer_Oleh extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_emenu__drawer__oleh, container, false);
 
-<<<<<<< HEAD
         progress = (ProgressBar)v.findViewById(R.id.menu_drawer_oleh_progbar);
-=======
-        data = getArguments().getString("id");
 
-        progress = (ProgressBar)v.findViewById(R.id.progbar);
->>>>>>> e3194f258d37837d90bac664129e8930f6a5ee24
+        data = getArguments().getString("id");
 
         listData = (GridView)v.findViewById(R.id.menu_drawer_oleh_grid);
         arrayItembaru = new ArrayList<ItemProduk>();
