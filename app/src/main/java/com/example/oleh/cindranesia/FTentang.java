@@ -15,7 +15,7 @@ public class FTentang extends AppCompatActivity {
         setContentView(R.layout.activity_ftentang);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.tooltentang);
+        tb = (Toolbar) findViewById(R.id.tentang_tool);
         setSupportActionBar(tb);
 
         //back-toolbar

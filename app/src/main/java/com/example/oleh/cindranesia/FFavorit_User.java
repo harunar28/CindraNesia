@@ -36,16 +36,16 @@ public class FFavorit_User extends AppCompatActivity {
         setContentView(R.layout.activity_ffavorit__user);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.toolfavorit);
+        tb = (Toolbar) findViewById(R.id.favorit_user_tool);
         setSupportActionBar(tb);
 
         //back-toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        progress = (ProgressBar)findViewById(R.id.progbar);
+        progress = (ProgressBar)findViewById(R.id.favorit_user_progbar);
 
-        listData = (GridView)findViewById(R.id.grid_user_favorit);
+        listData = (GridView)findViewById(R.id.favorit_user_grid);
         arrayItembaru = new ArrayList<ItemProduk>();
 
         alljudul_produk = new ArrayList<String>();

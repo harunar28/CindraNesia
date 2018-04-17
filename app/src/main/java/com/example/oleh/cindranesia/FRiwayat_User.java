@@ -36,16 +36,16 @@ public class FRiwayat_User extends AppCompatActivity {
         setContentView(R.layout.activity_friwayat__user);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.toolriwayat);
+        tb = (Toolbar) findViewById(R.id.riwayat_user_tool);
         setSupportActionBar(tb);
 
         //back-toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        progress = (ProgressBar)findViewById(R.id.progbar);
+        progress = (ProgressBar)findViewById(R.id.riwayat_user_progbar);
 
-        listData = (GridView)findViewById(R.id.grid_user_riwayat);
+        listData = (GridView)findViewById(R.id.riwayat_user_grid);
         arrayItembaru = new ArrayList<ItemProduk>();
 
         alljudul_produk = new ArrayList<String>();
