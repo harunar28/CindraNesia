@@ -2,12 +2,16 @@ package com.example.oleh.cindranesia;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -45,6 +51,10 @@ public class GProfil extends AppCompatActivity {
     String id_user,path;
     ImageButton image;
     Toolbar tb;
+
+    Bitmap bitmap;
+
+    private static final int GALLERY_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,18 @@ public class GProfil extends AppCompatActivity {
         email = (EditText)findViewById(R.id.profil_email);
         nohp = (EditText)findViewById(R.id.profil_telpon);
         image = (ImageButton) findViewById(R.id.profil_foto);
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GALLERY_REQUEST);
+            }
+        });
+
+
+
         update = (Button) findViewById(R.id.profil_btn_simpan);
 
         if(JsonUtils.isNetworkAvailable(GProfil.this)){
@@ -88,10 +110,33 @@ public class GProfil extends AppCompatActivity {
                 em = email.getText().toString();
                 nh = nohp.getText().toString();
 
-                new update().execute();
+                UploadImageServer();
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int RC, int RQC, Intent I) {
+
+        super.onActivityResult(RC, RQC, I);
+
+        if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
+
+            Uri uri = I.getData();
+
+            try {
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                image.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -163,27 +208,40 @@ public class GProfil extends AppCompatActivity {
 
     }
 
-    public class update extends AsyncTask<Void, Void, Void> {
-        ProgressDialog dialog;
 
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(GProfil.this,"","Harap Tunggu...",true);
+    public void UploadImageServer() {
 
+        ByteArrayOutputStream byteArrayOutputStreamObject ;
+        byteArrayOutputStreamObject = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStreamObject);
+        byte[] byteArrayVar = byteArrayOutputStreamObject.toByteArray();
+
+        final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
+
+        class update extends AsyncTask<Void, Void, Void> {
+            ProgressDialog dialog;
+
+            @Override
+            protected void onPreExecute() {
+                dialog = ProgressDialog.show(GProfil.this, "", "Harap Tunggu...", true);
+
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                Result = getUpdate(id_user, nm, tmpt, tg, jk, al, em, nh, ConvertImage);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                dialog.dismiss();
+                resultUpdate(Result);
+            }
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            Result = getUpdate(nm,tmpt,tg,jk,al,em,nh);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            dialog.dismiss();
-            resultUpdate(Result);
-        }
+        new update().execute();
     }
 
     public void resultUpdate(String HasilProses){
@@ -197,13 +255,14 @@ public class GProfil extends AppCompatActivity {
         }
     }
 
-    public String getUpdate(String nama, String tempat, String tgl, String jenkel, String alamat, String email, String nohp){
+    public String getUpdate(String id,String nama, String tempat, String tgl, String jenkel, String alamat, String email, String nohp, String path){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/updateprofil.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
+            nvp.add(new BasicNameValuePair("id_user",id));
             nvp.add(new BasicNameValuePair("nama",nama));
             nvp.add(new BasicNameValuePair("tempat",tempat));
             nvp.add(new BasicNameValuePair("tgl",tgl));
@@ -211,6 +270,7 @@ public class GProfil extends AppCompatActivity {
             nvp.add(new BasicNameValuePair("alamat",alamat));
             nvp.add(new BasicNameValuePair("email",email));
             nvp.add(new BasicNameValuePair("nohp",nohp));
+            nvp.add(new BasicNameValuePair("path",path));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
             HttpResponse response = client.execute(request);
             result = request(response);

@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,8 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
     ViewPager vp;
     TabLayout tl;
+
+    ImageView profile;
 
     String id_user;
     TextView nama,email;
@@ -67,7 +71,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
 
         View header = view.getHeaderView(0);
-        ImageView profile = (ImageView) header.findViewById(R.id.avatar);
+        profile = (ImageView) header.findViewById(R.id.avatar);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +170,13 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
                         nama.setText(JsonObj.getString("nama_lengkap"));
                         email.setText(JsonObj.getString("email"));
+
+
+                        Picasso
+                                .with(EMenu_Drawer.this)
+                                .load(JsonObj.getString("path_profil"))
+                                .fit()
+                                .into(profile);
 
 
                     }
