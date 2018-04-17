@@ -261,7 +261,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/detail_user_ulasan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
