@@ -5,11 +5,20 @@ import android.os.Bundle;
 
 public class ItemProduk extends AppCompatActivity {
 
+    private String id;
     private String judul_produk;
     private String nama_toko;
     private String alamat_toko;
     private String kota_toko;
     private String jenis_produk;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getJudul_produk() {
         return judul_produk;
