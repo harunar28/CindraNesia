@@ -38,7 +38,6 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
     TabLayout tl;
 
     String id_user;
-
     TextView nama,email;
 
     @Override

@@ -38,7 +38,8 @@
         <activity android:name=".ItemFavorit" />
         <activity android:name=".FDetail_User" />
         <activity android:name=".FPemesanan_Owner" />
-        <activity android:name=".FTentang"></activity>
+        <activity android:name=".FTentang" />
+        <activity android:name=".DDaftar_Owner_2"></activity>
     </application>
 
 </manifest>

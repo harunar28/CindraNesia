@@ -93,11 +93,11 @@ public class GProfil extends AppCompatActivity {
                         nohp.setText(JsonObj.getString("no_telp"));
                         path = JsonObj.getString("path_profil");
 
-                        Picasso
-                                .with(GProfil.this)
-                                .load(path)
-                                .fit()
-                                .into(image);
+//                        Picasso
+//                                .with(GProfil.this)
+//                                .load(path)
+//                                .fit()
+//                                .into(image);
 
                     }
 

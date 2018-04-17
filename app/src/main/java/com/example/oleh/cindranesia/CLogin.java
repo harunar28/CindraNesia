@@ -142,7 +142,9 @@ public class CLogin extends AppCompatActivity {
                                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(CLogin.this, EMenu_Owner.class));
+                                            Intent a = new Intent(CLogin.this, EMenu_Owner.class);
+                                            a.putExtra("id",id_user);
+                                            startActivity(a);
                                         }
                                     }).show();
                         }
