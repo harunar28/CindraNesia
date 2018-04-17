@@ -38,7 +38,6 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
     TabLayout tl;
 
     String id_user;
-
     TextView nama,email;
 
     @Override
@@ -191,6 +190,10 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
             Fragment f = null;
             if (position == 0) {
                 f = new EMenu_Drawer_Oleh();
+
+                Bundle data = new Bundle();
+                data.putString("id",id_user);
+                f.setArguments(data);
             }
             if (position == 1) {
                 f = new EMenu_Drawer_Populer();

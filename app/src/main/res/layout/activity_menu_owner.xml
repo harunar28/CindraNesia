@@ -6,29 +6,29 @@
     android:layout_height="155dp">
 
     <ImageView
-        android:id="@+id/menu_owner_foto"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/avatar" />
+        android:src="@drawable/avatar"
+        android:id="@+id/avatar_owner"/>
 
     <TextView
-        android:id="@+id/menu_owner_nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:text="Mutia Safari"
         android:textColor="#ffffff"
         android:textSize="18sp"
+        android:id="@+id/nama_owner"
         android:layout_marginTop="8dp"/>
 
     <TextView
-        android:id="@+id/menu_owner_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="mutia@gmail.com"
         android:textColor="#ffffff"
         android:textSize="16sp"
+        android:id="@+id/email_owner"
         android:layout_marginLeft="25dp"/>
 </LinearLayout>
