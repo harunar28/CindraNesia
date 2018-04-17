@@ -67,7 +67,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
 
         View header = view.getHeaderView(0);
-        ImageView profile = (ImageView) header.findViewById(R.id.avatar);
+        ImageView profile = (ImageView) header.findViewById(R.id.avatar_user);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,8 +77,8 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        nama = (TextView)header.findViewById(R.id.nama);
-        email = (TextView)header.findViewById(R.id.email);
+        nama = (TextView)header.findViewById(R.id.nama_user);
+        email = (TextView)header.findViewById(R.id.email_user);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Drawer.this)){
             new Tampil().execute("https://cindranesia.000webhostapp.com/tampildrawer.php?id_user="+id_user);

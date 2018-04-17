@@ -64,74 +64,117 @@
                 android:textSize="18sp" />
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
                 <ImageView
                     android:id="@+id/harun"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="50dp"
                     android:src="@drawable/cowo" />
 
                 <TextView
                     android:id="@+id/namaharun"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/harun"
-                    android:layout_marginLeft="75dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/harun"
                     android:text="Harun"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/emailharun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/namaharun"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/harun"
+                    android:text="harunarrosid072gmail.com"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp">
 
                 <ImageView
                     android:id="@+id/mute"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_alignLeft="@+id/namamute"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/namamute"
                     android:src="@drawable/avatar" />
 
                 <TextView
                     android:id="@+id/namamute"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/mute"
-                    android:layout_marginLeft="100dp"
-                    android:layout_toRightOf="@id/namaharun"
+                    android:layout_toRightOf="@id/mute"
+                    android:layout_marginTop="20dp"
                     android:text="Mutia Safari"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/emailmute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/mute"
+                    android:layout_below="@id/namamute"
+                    android:text="mutiasafari97@gmail.com"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
                 <ImageView
                     android:id="@+id/esti"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_below="@+id/namamute"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="19dp"
                     android:src="@drawable/flat_hijab" />
 
                 <TextView
+                    android:id="@+id/namaesti"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/esti"
+                    android:layout_toRightOf="@id/esti"
+                    android:layout_marginTop="20dp"
                     android:text="Esti Rosmana"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="130dp"/>
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/emailesti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/esti"
+                    android:layout_below="@id/namaesti"
+                    android:text="estirosmanasmkn1@gmail.com"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
             </RelativeLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="Politeknik Negeri Jakarta"
                 android:textColor="@color/colorPrimary"
-                android:textSize="30sp"
-                android:layout_marginBottom="30dp"/>
+                android:textSize="30sp" />
 
         </LinearLayout>
     </ScrollView>
