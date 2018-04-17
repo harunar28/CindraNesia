@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,8 +38,8 @@ public class FDetail_User extends AppCompatActivity {
 
     TextView judul,desk,nama,alamat,kota,arah,harga;
     ImageView image;
-    EditText ulasan;
-    Button kirim;
+    EditText ulasan,jmh;
+    Button kirim,simpan;
 
     String iduser,idproduk,idtoko;
     String ulas;
@@ -61,6 +62,7 @@ public class FDetail_User extends AppCompatActivity {
         ulasan = (EditText) findViewById(R.id.detail_user_ulasan);
 
         kirim = (Button) findViewById(R.id.detail_user_btnKirim);
+        simpan = (Button) findViewById(R.id.detail_user_btnSimpan);
 
         image = (ImageView)findViewById(R.id.detail_user_img);
 
@@ -95,6 +97,47 @@ public class FDetail_User extends AppCompatActivity {
         });
 
 
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                jumlah();
+            }
+        });
+
+    }
+
+
+    private void jumlah(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Masukan Jumlah Pesanan");
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View v = inflater.inflate(R.layout.item_jumlah_pesan,null);
+
+        jmh = (EditText) v.findViewById(R.id.jumlah);
+
+        dialog.setView(v);
+
+        dialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String jumlah = jmh.getText().toString();
+
+                save(jumlah);
+
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public class Tampil extends AsyncTask<String, Void, String> {
@@ -162,60 +205,67 @@ public class FDetail_User extends AppCompatActivity {
 
 
 
-    public class simpan extends AsyncTask<Void, Void, Void> {
-        ProgressDialog dialog;
+    public void save(final String jmh) {
 
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(FDetail_User.this,"","Harap Tunggu...",true);
+        class simpan extends AsyncTask<Void, Void, Void> {
+            ProgressDialog dialog;
 
+            @Override
+            protected void onPreExecute() {
+                dialog = ProgressDialog.show(FDetail_User.this, "", "Harap Tunggu...", true);
+
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                Result = getSimpan(iduser, idproduk, idtoko, jmh);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                dialog.dismiss();
+                resultSimpan(Result);
+            }
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            Result = getSimpan(iduser,idproduk,ulas);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            dialog.dismiss();
-            resultSimpan(Result);
-        }
+        new simpan().execute();
     }
 
-    public void resultSimpan(String HasilProses){
-        if(HasilProses.trim().equalsIgnoreCase("OK")){
+    public void resultSimpan(String HasilProses) {
+        if (HasilProses.trim().equalsIgnoreCase("OK")) {
             Toast.makeText(FDetail_User.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FDetail_User.this, CLogin.class));
-        }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
+        } else if (HasilProses.trim().equalsIgnoreCase("Failed")) {
             Toast.makeText(FDetail_User.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Log.d("HasilProses", HasilProses);
         }
     }
 
-    public String getSimpan(String iduser, String idproduk, String ulasan){
+    public String getSimpan(String iduser, String idproduk, String idtoko, String jumlah) {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
-        try{
+        try {
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
-            nvp.add(new BasicNameValuePair("id_user",iduser));
-            nvp.add(new BasicNameValuePair("id_produk",idproduk));
-            nvp.add(new BasicNameValuePair("ulasan",ulasan));
+            nvp.add(new BasicNameValuePair("id_user", iduser));
+            nvp.add(new BasicNameValuePair("id_produk", idproduk));
+            nvp.add(new BasicNameValuePair("id_toko", idtoko));
+            nvp.add(new BasicNameValuePair("jumlah", jumlah));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
             HttpResponse response = client.execute(request);
             result = request(response);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             result = "Unable To connect";
         }
 
         return result;
     }
+
 
 
 
