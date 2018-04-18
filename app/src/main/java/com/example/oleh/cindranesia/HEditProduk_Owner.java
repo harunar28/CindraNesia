@@ -3,7 +3,6 @@ package com.example.oleh.cindranesia;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -42,100 +40,65 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GProfil extends AppCompatActivity {
+public class HEditProduk_Owner extends AppCompatActivity {
 
-    EditText nama,tempat,tgl,jenkel,alamat,email,nohp;
-    String nm,tmpt,tg,jk,al,em,nh;
-    Button update;
+    EditText jenis_produk,judul_produk,deskripsi_produk,harga_produk;
+    Button edit;
+    String jenpro,judpro,despro,harpro,id;
     String Result;
-    String id_user,path;
-    ImageButton image;
-    Toolbar tb;
 
     Bitmap bitmap;
-
+    private ImageButton mSelectImage;
     private static final int GALLERY_REQUEST = 1;
 
+    Toolbar tb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gprofil);
+        setContentView(R.layout.activity_hedit_produk__owner);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.profil_tool);
+        tb = (Toolbar) findViewById(R.id.edit_produk_tool);
         setSupportActionBar(tb);
 
         //back-toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        id_user = getIntent().getExtras().getString("id");
+        id = getIntent().getExtras().getString("id");
 
-        nama = (EditText)findViewById(R.id.profil_nama);
-        tempat = (EditText)findViewById(R.id.profil_tempat_lahir);
-        tgl = (EditText)findViewById(R.id.profil_tgl_lahir_);
-        jenkel = (EditText)findViewById(R.id.profil_jenkel);
-        alamat = (EditText)findViewById(R.id.profil_alamat);
-        email = (EditText)findViewById(R.id.profil_email);
-        nohp = (EditText)findViewById(R.id.profil_telpon);
-        image = (ImageButton) findViewById(R.id.profil_foto);
+        jenis_produk = (EditText)findViewById(R.id.edit_produk_jenis);
+        judul_produk = (EditText)findViewById(R.id.edit_produk_judul);
+        deskripsi_produk = (EditText)findViewById(R.id.edit_produk_deskripsi);
+        harga_produk = (EditText)findViewById(R.id.edit_produk_harga);
+        mSelectImage = (ImageButton) findViewById(R.id.edit_produk_img);
+        edit = (Button)findViewById(R.id.tambah_produk_btnsimpan);
 
-        image.setOnClickListener(new View.OnClickListener() {
+        mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, GALLERY_REQUEST);
             }
         });
 
-
-
-        update = (Button) findViewById(R.id.profil_btn_simpan);
-
-        if(JsonUtils.isNetworkAvailable(GProfil.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilprofil.php?id_user="+id_user);
-        }else{
-            Toast.makeText(GProfil.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
-        }
-
-        update.setOnClickListener(new View.OnClickListener() {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nm = nama.getText().toString();
-                tmpt = tempat.getText().toString();
-                tg = tgl.getText().toString();
-                jk = jenkel.getText().toString();
-                al = alamat.getText().toString();
-                em = email.getText().toString();
-                nh = nohp.getText().toString();
-
+                jenpro = jenis_produk.getText().toString();
+                judpro = judul_produk.getText().toString();
+                despro = deskripsi_produk.getText().toString();
+                harpro = harga_produk.getText().toString();
                 UploadImageServer();
-
             }
         });
-    }
 
-
-    @Override
-    protected void onActivityResult(int RC, int RQC, Intent I) {
-
-        super.onActivityResult(RC, RQC, I);
-
-        if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
-
-            Uri uri = I.getData();
-
-            try {
-
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-
-                image.setImageBitmap(bitmap);
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-            }
+        if(JsonUtils.isNetworkAvailable(HEditProduk_Owner.this)){
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampileditproduk.php?id_produk="+id);
+        }else{
+            Toast.makeText(HEditProduk_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -152,7 +115,7 @@ public class GProfil extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pDialog = new ProgressDialog(GProfil.this);
+            pDialog = new ProgressDialog(HEditProduk_Owner.this);
             pDialog.setMessage("Loading...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -172,7 +135,7 @@ public class GProfil extends AppCompatActivity {
             }
 
             if (null == hasil || hasil.length() == 0) {
-                Toast.makeText(GProfil.this, "Tidak Ada data!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HEditProduk_Owner.this, "Tidak Ada data!!!", Toast.LENGTH_SHORT).show();
             } else {
                 try {
                     JSONObject JsonUtama = new JSONObject(hasil);
@@ -182,20 +145,17 @@ public class GProfil extends AppCompatActivity {
 
                         JsonObj = jsonArray.getJSONObject(i);
 
-                        nama.setText(JsonObj.getString("nama_lengkap"));
-                        tempat.setText(JsonObj.getString("tempat_lahir"));
-                        tgl.setText(JsonObj.getString("tgl_lahir"));
-                        jenkel.setText(JsonObj.getString("jenis_kelamin"));
-                        alamat.setText(JsonObj.getString("alamat"));
-                        email.setText(JsonObj.getString("email"));
-                        nohp.setText(JsonObj.getString("no_telp"));
-                        path = JsonObj.getString("path_profil");
+                        jenis_produk.setText(JsonObj.getString("jenis_produk"));
+                        judul_produk.setText(JsonObj.getString("judul_produk"));
+                        deskripsi_produk.setText(JsonObj.getString("deskripsi_produk"));
+                        harga_produk.setText(JsonObj.getString("harga_produk"));
+                        String path = JsonObj.getString("path_produk");
 
-//                        Picasso
-//                                .with(GProfil.this)
-//                                .load(path)
-//                                .fit()
-//                                .into(image);
+                        Picasso
+                                .with(HEditProduk_Owner.this)
+                                .load(path)
+                                .fit()
+                                .into(mSelectImage);
 
                     }
 
@@ -208,6 +168,27 @@ public class GProfil extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int RC, int RQC, Intent I) {
+
+        super.onActivityResult(RC, RQC, I);
+
+        if (RC == 1 && RQC == RESULT_OK && I != null && I.getData() != null) {
+
+            Uri uri = I.getData();
+
+            try {
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                mSelectImage.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void UploadImageServer() {
 
@@ -218,58 +199,54 @@ public class GProfil extends AppCompatActivity {
 
         final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
 
-        class update extends AsyncTask<Void, Void, Void> {
+        class Edit extends AsyncTask<Void, Void, Void> {
             ProgressDialog dialog;
 
             @Override
             protected void onPreExecute() {
-                dialog = ProgressDialog.show(GProfil.this, "", "Harap Tunggu...", true);
+                dialog = ProgressDialog.show(HEditProduk_Owner.this,"","Harap Tunggu...",true);
 
             }
 
             @Override
             protected Void doInBackground(Void... params) {
 
-                Result = getUpdate(id_user, nm, tmpt, tg, jk, al, em, nh, ConvertImage);
+                Result = getEdit(jenpro,judpro,despro,harpro,ConvertImage);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result) {
                 dialog.dismiss();
-                resultUpdate(Result);
+                resultEdit(Result);
             }
         }
 
-        new update().execute();
+        new Edit().execute();
     }
 
-    public void resultUpdate(String HasilProses){
+    public void resultEdit(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(GProfil.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(GProfil.this, CLogin.class));
+            Toast.makeText(HEditProduk_Owner.this, "Produk berhasil diubah", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(HEditProduk_Owner.this, EMenu_Owner.class));
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
-            Toast.makeText(GProfil.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HEditProduk_Owner.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         }else{
             Log.d("HasilProses", HasilProses);
         }
     }
 
-    public String getUpdate(String id,String nama, String tempat, String tgl, String jenkel, String alamat, String email, String nohp, String path){
+    public String getEdit(String jenis_produk, String judul_produk, String deskripsi_produk, String harga_produk, String path){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/updateprofil.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/editproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
-            nvp.add(new BasicNameValuePair("id_user",id));
-            nvp.add(new BasicNameValuePair("nama",nama));
-            nvp.add(new BasicNameValuePair("tempat",tempat));
-            nvp.add(new BasicNameValuePair("tgl",tgl));
-            nvp.add(new BasicNameValuePair("jenkel",jenkel));
-            nvp.add(new BasicNameValuePair("alamat",alamat));
-            nvp.add(new BasicNameValuePair("email",email));
-            nvp.add(new BasicNameValuePair("nohp",nohp));
+            nvp.add(new BasicNameValuePair("jenis_produk",jenis_produk));
+            nvp.add(new BasicNameValuePair("judul_produk",judul_produk));
+            nvp.add(new BasicNameValuePair("deskripsi_produk",deskripsi_produk));
+            nvp.add(new BasicNameValuePair("harga_produk",harga_produk));
             nvp.add(new BasicNameValuePair("path",path));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
             HttpResponse response = client.execute(request);

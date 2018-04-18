@@ -115,7 +115,7 @@ public class DDaftar_User extends Fragment {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahuser.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahuser.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("nama_lengkap",nama_lengkap));

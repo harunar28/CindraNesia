@@ -13,7 +13,6 @@ public class ItemProduk extends AppCompatActivity {
     private String kota_toko;
     private String jenis_produk;
 
-
     public String getIdtoko() {
         return idtoko;
     }

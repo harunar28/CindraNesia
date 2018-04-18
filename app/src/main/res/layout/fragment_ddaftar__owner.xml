@@ -5,16 +5,6 @@
     android:orientation="vertical"
     tools:context="com.example.oleh.cindranesia.DDaftar_Owner">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
             <EditText
                 android:id="@+id/fname_owner"
                 android:layout_width="match_parent"
@@ -73,45 +63,6 @@
                 android:textColorHint="@color/colorPrimary" />
 
             <EditText
-                android:id="@+id/ntoko_owner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/field_merah"
-                android:drawableLeft="@drawable/home_merah"
-                android:hint="  Nama Toko"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/colorPrimary" />
-
-            <EditText
-                android:id="@+id/nosurat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/field_merah"
-                android:drawableLeft="@drawable/nomor_merah"
-                android:hint="  No. SIUP/SITU/IUMK"
-                android:padding="10dp"
-                android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/colorPrimary" />
-
-            <ImageButton
-                android:layout_width="250dp"
-                android:layout_height="150dp"
-                android:id="@+id/gambar_izin"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/colorPrimary"
-                android:src="@drawable/add_photo"
-                android:layout_gravity="center"/>
-
-            <EditText
                 android:id="@+id/nohp_owner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,7 +88,4 @@
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
-        </LinearLayout>
-
-    </ScrollView>
 </LinearLayout>

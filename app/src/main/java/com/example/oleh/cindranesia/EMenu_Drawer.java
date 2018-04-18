@@ -71,7 +71,11 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
 
         View header = view.getHeaderView(0);
+<<<<<<< HEAD
         profile = (ImageView) header.findViewById(R.id.avatar);
+=======
+        ImageView profile = (ImageView) header.findViewById(R.id.avatar_user);
+>>>>>>> 9791e7a806210fe03c983f4c17a09012565d99f7
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,11 +85,11 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        nama = (TextView)header.findViewById(R.id.nama);
-        email = (TextView)header.findViewById(R.id.email);
+        nama = (TextView)header.findViewById(R.id.nama_user);
+        email = (TextView)header.findViewById(R.id.email_user);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Drawer.this)){
-            new Tampil().execute("https://cindranesia.000webhostapp.com/tampildrawer.php?id_user="+id_user);
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampildrawer.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Drawer.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }

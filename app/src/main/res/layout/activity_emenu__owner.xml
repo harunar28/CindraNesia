@@ -23,20 +23,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                app:title="Beranda"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark">
-            </android.support.v7.widget.Toolbar>
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:title="Beranda"></android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolowner"
+                android:gravity="center"
+                android:text="Selamat Datang di CindraNesiaApp"
+                android:textColor="#000"
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Ketuk tanda tambah untuk menambahkan produk."
+                android:textColor="#000"
+                android:textSize="8pt" />
+
+            <GridView
+                android:id="@+id/menu_owner_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text2"
+                android:layout_marginTop="10dp"
+                android:numColumns="1"
+                android:padding="5dp"></GridView>
+
+            <ProgressBar
+                android:id="@+id/menu_owner_progbar"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/menu_owner_tambah"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="78dp" />
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/menu_owner_tambah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/text2"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/text2"
+                android:layout_marginBottom="54dp"
+                android:src="@drawable/ic_add_white_24dp" />
         </RelativeLayout>
 
         <android.support.design.widget.NavigationView
+            android:id="@+id/viewowner"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/viewowner"
             android:layout_gravity="start"
+            app:headerLayout="@layout/activity_menu_owner"
             app:itemIconTint="@color/colorPrimary"
             app:itemTextColor="@color/colorPrimary"
-            app:menu="@menu/menu_owner"
-            app:headerLayout="@layout/activity_menu_owner" />
+            app:menu="@menu/menu_owner" />
 
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>
