@@ -22,11 +22,11 @@ import java.util.List;
 public class FKeranjang_User extends AppCompatActivity {
 
     GridView listData;
-    List<ItemProduk> arrayItembaru;
-    AdapterProduk objAdapter;
-    private ItemProduk semuaItemobj;
-    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    List<ItemKeranjang> arrayItembaru;
+    AdapterKeranjang objAdapter;
+    private ItemKeranjang semuaItemobj;
+    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, alljumlah;
+    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arrayjumlah;
     ProgressBar progress;
     Toolbar tb;
 
@@ -46,19 +46,21 @@ public class FKeranjang_User extends AppCompatActivity {
         progress = (ProgressBar)findViewById(R.id.keranjang_user_progbar);
 
         listData = (GridView)findViewById(R.id.keranjang_user_grid);
-        arrayItembaru = new ArrayList<ItemProduk>();
+        arrayItembaru = new ArrayList<ItemKeranjang>();
 
         alljudul_produk = new ArrayList<String>();
         allnama_toko = new ArrayList<String>();
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        alljumlah = new ArrayList<String>();
 
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
+        arrayjumlah = new String[alljumlah.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
             new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
@@ -111,8 +113,6 @@ public class FKeranjang_User extends AppCompatActivity {
         protected void onPostExecute(String hasil) {
             super.onPostExecute(hasil);
 
-
-
             if (null != progress) {
                 progress.setVisibility(View.GONE);
             }
@@ -138,12 +138,13 @@ public class FKeranjang_User extends AppCompatActivity {
 
                         JsonObj = jsonArray.getJSONObject(i);
 
-                        ItemProduk buku = new ItemProduk();
+                        ItemKeranjang buku = new ItemKeranjang();
                         buku.setJudul_produk(JsonObj.getString("judul_produk"));
                         buku.setNama_toko(JsonObj.getString("nama_toko"));
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setJumlah(JsonObj.getString("jumlah"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -173,6 +174,9 @@ public class FKeranjang_User extends AppCompatActivity {
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
 
+                    alljumlah.add(semuaItemobj.getJumlah());
+                    arrayjumlah = alljumlah.toArray(arrayjumlah);
+
                 }
 
                 setAllAdapter();
@@ -182,7 +186,7 @@ public class FKeranjang_User extends AppCompatActivity {
     }
 
     public void setAllAdapter(){
-        objAdapter = new AdapterProduk(this,R.layout.item_produk,arrayItembaru);
+        objAdapter = new AdapterKeranjang(this,R.layout.item_keranjang,arrayItembaru);
         listData.setAdapter(objAdapter);
     }
 }

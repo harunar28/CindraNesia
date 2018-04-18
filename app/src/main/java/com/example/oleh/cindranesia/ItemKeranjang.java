@@ -1,9 +1,10 @@
 package com.example.oleh.cindranesia;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+/**
+ * Created by anggariansah on 18/04/2018.
+ */
 
-public class ItemProduk {
+public class ItemKeranjang {
 
     private String id;
     private String idtoko;
@@ -12,14 +13,14 @@ public class ItemProduk {
     private String alamat_toko;
     private String kota_toko;
     private String jenis_produk;
-    private String gambar;
+    private String jumlah;
 
-    public String getGambar() {
-        return gambar;
+    public String getJumlah() {
+        return jumlah;
     }
 
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
     }
 
     public String getIdtoko() {
