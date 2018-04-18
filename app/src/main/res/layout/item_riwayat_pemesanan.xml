@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="#fff">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/relat"
+                    android:layout_below="@id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kotaklogin">
+
+
+                    <ImageView
+                        android:id="@+id/gambar"
+                        android:layout_width="350dp"
+                        android:layout_height="150dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/bakpia" />
+
+                    <TextView
+                        android:id="@+id/judul_produk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/gambar"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Bakpia"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/judul_produk"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Nama Toko"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/judul_produk"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/txt1"
+                        android:text=":"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nama_toko"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/judul_produk"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/txt2"
+                        android:text="Bakpia 145 Ibu Sri Astuti"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Alamat Toko"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nama_toko"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txt3"
+                        android:text=":"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/alamat_toko"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nama_toko"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txt3"
+                        android:text="Jl. Kusumanegara No.151, Muja Muju, Umbulharjo"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt3"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Kota Toko"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt3"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/txt5"
+                        android:text=":"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/kota_toko"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/alamat_toko"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txt6"
+                        android:text="Yogyakarta"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt5"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Jenis Produk"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt6"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txt7"
+                        android:text=":"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/jenis_produk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/kota_toko"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/txt8"
+                        android:text="Makanan"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/itemriwayat_tgl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2018/19/04"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_alignParentLeft="true"/>
+                    <TextView
+                        android:id="@+id/itemriwayat_hapus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="X"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativ"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/relat"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jumlah Pesanan : "
+                        android:textColor="@color/colorPrimary"
+                        android:layout_toLeftOf="@+id/itemkeranjang_jumlah_pesan"/>
+                    <TextView
+                        android:id="@+id/itemkeranjang_jumlah_pesan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:text="Selamat Datang di CindraNesiaApp"
                 android:textColor="#000"
-                android:textSize="10pt" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/text2"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:text="Ketuk tanda tambah untuk menambahkan produk."
                 android:textColor="#000"
-                android:textSize="8pt" />
+                android:textSize="15sp" />
 
             <GridView
                 android:id="@+id/menu_owner_grid"
