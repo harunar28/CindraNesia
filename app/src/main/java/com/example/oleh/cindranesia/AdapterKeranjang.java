@@ -61,7 +61,7 @@ public class AdapterKeranjang extends ArrayAdapter<ItemKeranjang> {
 
         Picasso
                 .with(activity)
-                .load(semuaobj.getJudul_produk().toString())
+                .load(semuaobj.getGambar().toString())
                 .fit()
                 .into(holder.gmb);
 

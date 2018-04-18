@@ -36,8 +36,8 @@ public class EMenu_Drawer_Oleh extends Fragment {
     List<ItemProduk> arrayItembaru;
     AdapterProduk objAdapter;
     private ItemProduk semuaItemobj;
-    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, allgambar;
+    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arraygambar;
     ProgressBar progress;
     EditText by;
 
@@ -74,6 +74,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
         arrayid = new String[allid.size()];
         arrayidtoko = new String[allidtoko.size()];
@@ -82,6 +83,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
+        arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(getActivity())){
             new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
@@ -303,6 +305,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -337,6 +340,9 @@ public class EMenu_Drawer_Oleh extends Fragment {
 
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                    allgambar.add(semuaItemobj.getGambar());
+                    arraygambar = allgambar.toArray(arraygambar);
 
                 }
 

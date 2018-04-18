@@ -25,15 +25,18 @@ public class FKeranjang_User extends AppCompatActivity {
     List<ItemKeranjang> arrayItembaru;
     AdapterKeranjang objAdapter;
     private ItemKeranjang semuaItemobj;
-    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, alljumlah;
-    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arrayjumlah;
+    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, alljumlah, allgambar;
+    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arrayjumlah, arraygambar;
     ProgressBar progress;
     Toolbar tb;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fkeranjang__user);
+
+        id = getIntent().getExtras().getString("id");
 
         //toolbar
         tb = (Toolbar) findViewById(R.id.keranjang_user_tool);
@@ -54,6 +57,7 @@ public class FKeranjang_User extends AppCompatActivity {
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
         alljumlah = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
@@ -61,9 +65,10 @@ public class FKeranjang_User extends AppCompatActivity {
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
         arrayjumlah = new String[alljumlah.size()];
+        arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilkeranjang.php?id_user="+id);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
@@ -145,6 +150,7 @@ public class FKeranjang_User extends AppCompatActivity {
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
                         buku.setJumlah(JsonObj.getString("jumlah"));
+                        buku.setGambar(JsonObj.getString("gambar"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -173,6 +179,9 @@ public class FKeranjang_User extends AppCompatActivity {
 
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                    alljumlah.add(semuaItemobj.getJumlah());
+                    arrayjumlah = alljumlah.toArray(arrayjumlah);
 
                     alljumlah.add(semuaItemobj.getJumlah());
                     arrayjumlah = alljumlah.toArray(arrayjumlah);

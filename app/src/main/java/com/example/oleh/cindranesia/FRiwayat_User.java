@@ -22,11 +22,11 @@ import java.util.List;
 public class FRiwayat_User extends AppCompatActivity {
 
     GridView listData;
-    List<ItemProduk> arrayItembaru;
-    AdapterProduk objAdapter;
-    private ItemProduk semuaItemobj;
-    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    List<ItemRiwayatUser> arrayItembaru;
+    AdapterRiwayat objAdapter;
+    private ItemRiwayatUser semuaItemobj;
+    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, alljumlah, alltanggal, allgambar;
+    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arrayjumlah, arraytanggal, arraygambar;
     ProgressBar progress;
     Toolbar tb;
 
@@ -46,19 +46,25 @@ public class FRiwayat_User extends AppCompatActivity {
         progress = (ProgressBar)findViewById(R.id.riwayat_user_progbar);
 
         listData = (GridView)findViewById(R.id.riwayat_user_grid);
-        arrayItembaru = new ArrayList<ItemProduk>();
+        arrayItembaru = new ArrayList<ItemRiwayatUser>();
 
         alljudul_produk = new ArrayList<String>();
         allnama_toko = new ArrayList<String>();
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        alljumlah = new ArrayList<String>();
+        alltanggal = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
+        arrayjumlah = new String[alljumlah.size()];
+        arraytanggal = new String[alltanggal.size()];
+        arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
             new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
@@ -138,12 +144,15 @@ public class FRiwayat_User extends AppCompatActivity {
 
                         JsonObj = jsonArray.getJSONObject(i);
 
-                        ItemProduk buku = new ItemProduk();
+                        ItemRiwayatUser buku = new ItemRiwayatUser();
                         buku.setJudul_produk(JsonObj.getString("judul_produk"));
                         buku.setNama_toko(JsonObj.getString("nama_toko"));
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setJumlah(JsonObj.getString("jumlah"));
+                        buku.setTanggal(JsonObj.getString("tanggal"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -173,6 +182,9 @@ public class FRiwayat_User extends AppCompatActivity {
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
 
+                    alljumlah.add(semuaItemobj.getJumlah());
+                    arrayjumlah = alljumlah.toArray(arrayjumlah);
+
                 }
 
                 setAllAdapter();
@@ -182,7 +194,7 @@ public class FRiwayat_User extends AppCompatActivity {
     }
 
     public void setAllAdapter(){
-        objAdapter = new AdapterProduk(this,R.layout.item_produk,arrayItembaru);
+        objAdapter = new AdapterRiwayat(this,R.layout.item_riwayat_pemesanan,arrayItembaru);
         listData.setAdapter(objAdapter);
     }
 }

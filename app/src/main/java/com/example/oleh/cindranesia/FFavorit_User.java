@@ -25,8 +25,8 @@ public class FFavorit_User extends AppCompatActivity {
     List<ItemProduk> arrayItembaru;
     AdapterProduk objAdapter;
     private ItemProduk semuaItemobj;
-    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, allgambar;
+    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arraygambar;
     ProgressBar progress;
     Toolbar tb;
 
@@ -57,12 +57,14 @@ public class FFavorit_User extends AppCompatActivity {
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
+        arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
             new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilfavorit.php?id_user="+id);
@@ -148,6 +150,7 @@ public class FFavorit_User extends AppCompatActivity {
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -176,6 +179,9 @@ public class FFavorit_User extends AppCompatActivity {
 
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                    allgambar.add(semuaItemobj.getGambar());
+                    arraygambar = allgambar.toArray(arraygambar);
 
                 }
 

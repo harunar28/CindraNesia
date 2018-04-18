@@ -14,17 +14,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Created by Harun Ar on 08/04/2018.
+ * Created by anggariansah on 19/04/2018.
  */
 
-public class AdapterProduk extends ArrayAdapter<ItemProduk> {
+public class AdapterRiwayat extends ArrayAdapter<ItemRiwayatUser> {
     private Activity activity;
-    private List<ItemProduk> itembaru;
-    private ItemProduk semuaobj;
+    private List<ItemRiwayatUser> itembaru;
+    private ItemRiwayatUser semuaobj;
     private int row;
     Context ctx;
 
-    public AdapterProduk(Activity act, int resource, List<ItemProduk> arraylist) {
+    public AdapterRiwayat(Activity act, int resource, List<ItemRiwayatUser> arraylist) {
         super(act, resource, arraylist);
         this.activity = act;
         this.row = resource;
@@ -56,6 +56,8 @@ public class AdapterProduk extends ArrayAdapter<ItemProduk> {
         holder.alamat_toko = (TextView) view.findViewById(R.id.alamat_toko);
         holder.kota_toko = (TextView) view.findViewById(R.id.kota_toko);
         holder.jenis_produk = (TextView) view.findViewById(R.id.jenis_produk);
+        holder.jumlah = (TextView) view.findViewById(R.id.itemkeranjang_jumlah_pesan);
+        holder.tanggal = (TextView) view.findViewById(R.id.itemriwayat_tgl);
         holder.gmb = (ImageView) view.findViewById(R.id.gambar);
 
         Picasso
@@ -69,6 +71,8 @@ public class AdapterProduk extends ArrayAdapter<ItemProduk> {
         holder.alamat_toko.setText(semuaobj.getAlamat_toko().toString());
         holder.kota_toko.setText(semuaobj.getKota_toko().toString());
         holder.jenis_produk.setText(semuaobj.getJenis_produk().toString());
+        holder.jumlah.setText(semuaobj.getJumlah().toString());
+        holder.tanggal.setText(semuaobj.getTanggal().toString());
 
         return view;
     }
@@ -79,6 +83,8 @@ public class AdapterProduk extends ArrayAdapter<ItemProduk> {
         public TextView alamat_toko;
         public TextView kota_toko;
         public TextView jenis_produk;
+        public TextView jumlah;
+        public TextView tanggal;
         public ImageView gmb;
     }
 }

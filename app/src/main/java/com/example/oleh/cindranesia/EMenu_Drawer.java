@@ -104,11 +104,15 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 //                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu3:
-                startActivity(new Intent(this, FKeranjang_User.class));
+                Intent b = new Intent(EMenu_Drawer.this, FKeranjang_User.class);
+                b.putExtra("id", id_user);
+                startActivity(b);
 //                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu4:
-                startActivity(new Intent(this, FRiwayat_User.class));
+                Intent c = new Intent(EMenu_Drawer.this, FRiwayat_User.class);
+                c.putExtra("id", id_user);
+                startActivity(c);
 //                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu5:

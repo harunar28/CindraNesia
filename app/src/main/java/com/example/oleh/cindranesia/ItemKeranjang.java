@@ -14,6 +14,15 @@ public class ItemKeranjang {
     private String kota_toko;
     private String jenis_produk;
     private String jumlah;
+    private String gambar;
+
+    public String getGambar() {
+        return gambar;
+    }
+
+    public void setGambar(String gambar) {
+        this.gambar = gambar;
+    }
 
     public String getJumlah() {
         return jumlah;
