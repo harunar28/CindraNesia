@@ -69,10 +69,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
         vp.setAdapter(adapter);
         tl.setupWithViewPager(vp);
 
-
         View header = view.getHeaderView(0);
-
-        profile = (ImageView) header.findViewById(R.id.avatar);
 
         ImageView profile = (ImageView) header.findViewById(R.id.avatar_user);
         profile.setOnClickListener(new View.OnClickListener() {
