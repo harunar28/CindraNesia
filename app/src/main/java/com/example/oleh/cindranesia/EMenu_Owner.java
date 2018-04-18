@@ -136,7 +136,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         arrayjenis_produk = new String[alljenis_produk.size()];
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh_owner.php");
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
         }else{
             new AlertDialog.Builder(EMenu_Owner.this)
                     .setTitle("Failed")
