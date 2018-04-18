@@ -266,7 +266,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/field_merah"
-                    android:text="Bakpianya enak dan harga terjangkau. ga mengecewakanlah pokonya"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -284,6 +283,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
+
+                    <ProgressBar
+                        android:id="@+id/progres_ulasan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        />
 
                     <GridView
                         android:id="@+id/detail_user_grid"

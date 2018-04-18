@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FDetail_User extends AppCompatActivity {
+
+
+    GridView listData;
+    List<ItemUlasan> arrayItembaru;
+    AdapterUlasan objAdapter;
+    private ItemUlasan semuaItemobj;
+    ArrayList<String> allid, allnama, allulasan;
+    String[] arrayid, arraynama, arrayulasan;
+    ProgressBar progress;
 
     TextView judul,desk,nama,alamat,kota,arah,harga;
     ImageView image;
@@ -71,7 +82,7 @@ public class FDetail_User extends AppCompatActivity {
         idtoko = getIntent().getExtras().getString("idtoko");
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new Tampil().execute("https://cindranesia.000webhostapp.com/tampiloleh.php?id="+idproduk);
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php?id="+idproduk);
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -84,6 +95,38 @@ public class FDetail_User extends AppCompatActivity {
                         }
                     }).show();
         }
+
+
+        progress = (ProgressBar)findViewById(R.id.progres_ulasan);
+
+
+        listData = (GridView)findViewById(R.id.detail_user_grid);
+        arrayItembaru = new ArrayList<ItemUlasan>();
+
+        allid = new ArrayList<String>();
+        allnama = new ArrayList<String>();
+        allulasan = new ArrayList<String>();
+
+
+        arrayid = new String[allid.size()];
+        arraynama = new String[allnama.size()];
+        arrayulasan = new String[allulasan.size()];
+
+        if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilulasan.php");
+        }else{
+            new AlertDialog.Builder(FDetail_User.this)
+                    .setTitle("Failed")
+                    .setMessage("Harap Periksa Koneksi!")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Whatever...
+                        }
+                    }).show();
+        }
+
 
 
         kirim.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +246,93 @@ public class FDetail_User extends AppCompatActivity {
         }
     }
 
+
+
+    public class TampilUlasan extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return JsonUtils.getJSONString(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String hasil) {
+            super.onPostExecute(hasil);
+
+
+
+            if (null != progress) {
+                progress.setVisibility(View.GONE);
+            }
+
+            if(null == hasil || hasil.length() == 0){
+                new AlertDialog.Builder(FDetail_User.this)
+                        .setTitle("Failed")
+                        .setMessage("Harap Periksa Koneksi!")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Whatever...
+                            }
+                        }).show();
+                progress.setVisibility(View.GONE);
+            }else{
+                try {
+                    JSONObject JsonUtama =  new JSONObject(hasil);
+                    JSONArray jsonArray = JsonUtama.getJSONArray("data");
+                    JSONObject JsonObj = null;
+                    for(int i = 0;i < jsonArray.length();i++){
+
+                        JsonObj = jsonArray.getJSONObject(i);
+
+                        ItemUlasan buku = new ItemUlasan();
+
+                        buku.setId(JsonObj.getString("id_ulasan"));
+                        buku.setNama(JsonObj.getString("nama"));
+                        buku.setUlasan(JsonObj.getString("ulasan"));
+                        arrayItembaru.add(buku);
+
+                        //  intent(JsonObj.getString("idpasien"));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                for(int j=0;j<arrayItembaru.size();j++){
+
+                    semuaItemobj = arrayItembaru.get(j);
+
+                    allid.add(semuaItemobj.getId());
+                    arrayid = allid.toArray(arrayid);
+
+                    allnama.add(semuaItemobj.getNama());
+                    arraynama = allnama.toArray(arraynama);
+
+                    allulasan.add(semuaItemobj.getUlasan());
+                    arrayulasan = allnama.toArray(arrayulasan);
+
+
+                }
+
+                setAllAdapter();
+
+            }
+        }
+    }
+
+    public void setAllAdapter(){
+        objAdapter = new AdapterUlasan(FDetail_User.this,R.layout.item_ulasan,arrayItembaru);
+        listData.setAdapter(objAdapter);
+    }
 
 
     public void save(final String jmh) {
