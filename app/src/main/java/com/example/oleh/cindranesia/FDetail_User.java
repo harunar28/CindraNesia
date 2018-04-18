@@ -113,7 +113,7 @@ public class FDetail_User extends AppCompatActivity {
         arrayulasan = new String[allulasan.size()];
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilulasan.php");
+            new TampilUlasan().execute("http://192.168.56.10/android/cindranesia/tampilulasan.php");
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -366,7 +366,8 @@ public class FDetail_User extends AppCompatActivity {
     public void resultSimpan(String HasilProses) {
         if (HasilProses.trim().equalsIgnoreCase("OK")) {
             Toast.makeText(FDetail_User.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(FDetail_User.this, CLogin.class));
+            finish();
+            startActivity(getIntent());
         } else if (HasilProses.trim().equalsIgnoreCase("Failed")) {
             Toast.makeText(FDetail_User.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -426,8 +427,16 @@ public class FDetail_User extends AppCompatActivity {
 
     public void resultKirim(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(FDetail_User.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(FDetail_User.this, CLogin.class));
+            new AlertDialog.Builder(FDetail_User.this)
+                    .setTitle("Succes")
+                    .setMessage("Barang disimpan di keranjang!")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(FDetail_User.this, EMenu_Drawer.class));
+                        }
+                    }).show();
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
             Toast.makeText(FDetail_User.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         }else{

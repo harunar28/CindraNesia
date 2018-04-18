@@ -68,6 +68,8 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 
         id_user = getIntent().getExtras().getString("id");
 
+        text1 = (TextView)findViewById(R.id.text1);
+
         tb = (Toolbar)findViewById(R.id.toolowner);
         setSupportActionBar(tb);
 
@@ -403,6 +405,8 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
                         JsonObj = jsonArray.getJSONObject(i);
 
                         id_toko = JsonObj.getString("id_toko");
+
+                        text1.setText(JsonObj.getString("id_toko"));
 
                     }
 
