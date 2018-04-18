@@ -30,10 +30,14 @@ public class FFavorit_User extends AppCompatActivity {
     ProgressBar progress;
     Toolbar tb;
 
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ffavorit__user);
+
+        id = getIntent().getExtras().getString("id");
 
         //toolbar
         tb = (Toolbar) findViewById(R.id.favorit_user_tool);
@@ -61,7 +65,7 @@ public class FFavorit_User extends AppCompatActivity {
         arrayjenis_produk = new String[alljenis_produk.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilfavorit.php?id_user="+id);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")

@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -50,7 +52,7 @@ public class FDetail_User extends AppCompatActivity {
     TextView judul,desk,nama,alamat,kota,arah,harga;
     ImageView image;
     EditText ulasan,jmh;
-    Button kirim,simpan;
+    Button kirim,simpan,favorit;
 
     String iduser,idproduk,idtoko;
     String ulas;
@@ -74,6 +76,7 @@ public class FDetail_User extends AppCompatActivity {
 
         kirim = (Button) findViewById(R.id.detail_user_btnKirim);
         simpan = (Button) findViewById(R.id.detail_user_btnSimpan);
+        favorit = (Button) findViewById(R.id.detail_user_btnFavorit);
 
         image = (ImageView)findViewById(R.id.detail_user_img);
 
@@ -127,6 +130,13 @@ public class FDetail_User extends AppCompatActivity {
                     }).show();
         }
 
+
+        favorit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new favorit().execute();
+            }
+        });
 
 
         kirim.setOnClickListener(new View.OnClickListener() {
@@ -230,11 +240,11 @@ public class FDetail_User extends AppCompatActivity {
 
                         String path = JsonObj.getString("path");
 
-//                        Picasso
-//                                .with(GProfil.this)
-//                                .load(path)
-//                                .fit()
-//                                .into(image);
+                        Picasso
+                                .with(FDetail_User.this)
+                                .load(path)
+                                .fit()
+                                .into(image);
 
                     }
 
@@ -404,6 +414,73 @@ public class FDetail_User extends AppCompatActivity {
         return result;
     }
 
+
+
+    //KIRIM ULASAN
+
+    public class favorit extends AsyncTask<Void, Void, Void> {
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(FDetail_User.this,"","Harap Tunggu...",true);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            Result = getfavorit(iduser,idproduk,idtoko);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            dialog.dismiss();
+            resultfavorit(Result);
+        }
+    }
+
+    public void resultfavorit(String HasilProses){
+        if(HasilProses.trim().equalsIgnoreCase("OK")){
+            new AlertDialog.Builder(FDetail_User.this)
+                    .setTitle("Succes")
+                    .setMessage("Ulasan Berhasil Disimpan!")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    }).show();
+        }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
+            Toast.makeText(FDetail_User.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
+        }else{
+            Log.d("HasilProses", HasilProses);
+        }
+    }
+
+    public String getfavorit(String iduser, String idproduk, String idtoko){
+        String result = "";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahfavorit.php");
+        try{
+            List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
+            nvp.add(new BasicNameValuePair("id_user",iduser));
+            nvp.add(new BasicNameValuePair("id_produk",idproduk));
+            nvp.add(new BasicNameValuePair("id_toko",idtoko));
+            request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
+            HttpResponse response = client.execute(request);
+            result = request(response);
+
+        }catch (Exception ex){
+            result = "Unable To connect";
+        }
+
+        return result;
+    }
 
 
 
