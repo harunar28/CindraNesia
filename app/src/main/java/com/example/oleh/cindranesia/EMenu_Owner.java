@@ -103,7 +103,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         }
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil2().execute("http://192.168.56.10/android/cindranesia/tampilidtoko.php?id_user="+id);
+            new Tampil2().execute("http://192.168.56.10/android/cindranesia/tampilidtoko.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
