@@ -72,7 +72,7 @@ public class GProfil extends AppCompatActivity {
         update = (Button) findViewById(R.id.profil_btn_simpan);
 
         if(JsonUtils.isNetworkAvailable(GProfil.this)){
-            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilprofil.php?id_user="+id_user);
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilprofil.php?id_user="+id_user);
         }else{
             Toast.makeText(GProfil.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -201,7 +201,7 @@ public class GProfil extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/updateprofil.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/updateprofil.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("nama",nama));

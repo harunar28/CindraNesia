@@ -248,7 +248,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahkeranjang.php");
         try {
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user", iduser));
@@ -309,7 +309,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahulasan.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",iduser));

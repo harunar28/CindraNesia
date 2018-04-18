@@ -16,8 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,48 +40,39 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DDaftar_Owner_2 extends AppCompatActivity {
+public class HEditProduk_Owner extends AppCompatActivity {
 
-    EditText nama_toko,alamat_toko,kota_toko,no_surat,arah;
-    TextView id;
-    Button daftar2;
-    String nt,al,kt,nosurat,ar,id_user;
+    EditText jenis_produk,judul_produk,deskripsi_produk,harga_produk;
+    Button edit;
+    String jenpro,judpro,despro,harpro,id;
     String Result;
-    String email,path;
-    Toolbar tb;
 
     Bitmap bitmap;
     private ImageButton mSelectImage;
     private static final int GALLERY_REQUEST = 1;
 
+    Toolbar tb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ddaftar__owner_2);
+        setContentView(R.layout.activity_hedit_produk__owner);
 
         //toolbar
-        tb = (Toolbar) findViewById(R.id.daftar_owner2_tool);
+        tb = (Toolbar) findViewById(R.id.edit_produk_tool);
         setSupportActionBar(tb);
 
         //back-toolbar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        email = getIntent().getExtras().getString("email");
+        id = getIntent().getExtras().getString("id");
 
-        nama_toko = (EditText)findViewById(R.id.ntoko_owner);
-        alamat_toko = (EditText)findViewById(R.id.alamat_toko_owner);
-        kota_toko = (EditText)findViewById(R.id.kota_toko_owner);
-        no_surat = (EditText)findViewById(R.id.nosurat);
-        arah = (EditText)findViewById(R.id.arah_toko_owner);
-        daftar2 = (Button)findViewById(R.id.btndaftar_owner2);
-        mSelectImage = (ImageButton) findViewById(R.id.gambar_surat);
-
-        if(JsonUtils.isNetworkAvailable(DDaftar_Owner_2.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilidowner.php?email="+email);
-        }else{
-            Toast.makeText(DDaftar_Owner_2.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
-        }
+        jenis_produk = (EditText)findViewById(R.id.edit_produk_jenis);
+        judul_produk = (EditText)findViewById(R.id.edit_produk_judul);
+        deskripsi_produk = (EditText)findViewById(R.id.edit_produk_deskripsi);
+        harga_produk = (EditText)findViewById(R.id.edit_produk_harga);
+        mSelectImage = (ImageButton) findViewById(R.id.edit_produk_img);
+        edit = (Button)findViewById(R.id.tambah_produk_btnsimpan);
 
         mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,23 +84,88 @@ public class DDaftar_Owner_2 extends AppCompatActivity {
             }
         });
 
-        daftar2.setOnClickListener(new View.OnClickListener() {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nt = nama_toko.getText().toString();
-                al = alamat_toko.getText().toString();
-                kt = kota_toko.getText().toString();
-                nosurat = no_surat.getText().toString();
-                ar = arah.getText().toString();
+                jenpro = jenis_produk.getText().toString();
+                judpro = judul_produk.getText().toString();
+                despro = deskripsi_produk.getText().toString();
+                harpro = harga_produk.getText().toString();
                 UploadImageServer();
             }
         });
+
+        if(JsonUtils.isNetworkAvailable(HEditProduk_Owner.this)){
+            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampileditproduk.php?id_produk="+id);
+        }else{
+            Toast.makeText(HEditProduk_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return false;
+    }
+
+    public class Tampil extends AsyncTask<String, Void, String> {
+        ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(HEditProduk_Owner.this);
+            pDialog.setMessage("Loading...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return JsonUtils.getJSONString(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String hasil) {
+            super.onPostExecute(hasil);
+
+            if (null != pDialog && pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+
+            if (null == hasil || hasil.length() == 0) {
+                Toast.makeText(HEditProduk_Owner.this, "Tidak Ada data!!!", Toast.LENGTH_SHORT).show();
+            } else {
+                try {
+                    JSONObject JsonUtama = new JSONObject(hasil);
+                    JSONArray jsonArray = JsonUtama.getJSONArray("data");
+                    JSONObject JsonObj = null;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JsonObj = jsonArray.getJSONObject(i);
+
+                        jenis_produk.setText(JsonObj.getString("jenis_produk"));
+                        judul_produk.setText(JsonObj.getString("judul_produk"));
+                        deskripsi_produk.setText(JsonObj.getString("deskripsi_produk"));
+                        harga_produk.setText(JsonObj.getString("harga_produk"));
+                        String path = JsonObj.getString("path_produk");
+
+                        Picasso
+                                .with(HEditProduk_Owner.this)
+                                .load(path)
+                                .fit()
+                                .into(mSelectImage);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
     }
 
     @Override
@@ -133,62 +190,6 @@ public class DDaftar_Owner_2 extends AppCompatActivity {
         }
     }
 
-    public class Tampil extends AsyncTask<String, Void, String> {
-        ProgressDialog pDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pDialog = new ProgressDialog(DDaftar_Owner_2.this);
-            pDialog.setMessage("Loading...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            return JsonUtils.getJSONString(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String hasil) {
-            super.onPostExecute(hasil);
-
-            if (null != pDialog && pDialog.isShowing()) {
-                pDialog.dismiss();
-            }
-
-            if (null == hasil || hasil.length() == 0) {
-                Toast.makeText(DDaftar_Owner_2.this, "Tidak Ada data!!!", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    JSONObject JsonUtama = new JSONObject(hasil);
-                    JSONArray jsonArray = JsonUtama.getJSONArray("data");
-                    JSONObject JsonObj = null;
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        JsonObj = jsonArray.getJSONObject(i);
-
-                        id_user = JsonObj.getString("id_user");
-
-//                        Picasso
-//                                .with(GProfil.this)
-//                                .load(path)
-//                                .fit()
-//                                .into(image);
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-
-    }
-
     public void UploadImageServer() {
 
         ByteArrayOutputStream byteArrayOutputStreamObject ;
@@ -198,56 +199,54 @@ public class DDaftar_Owner_2 extends AppCompatActivity {
 
         final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
 
-        class daftarOwner2 extends AsyncTask<Void, Void, Void> {
+        class Edit extends AsyncTask<Void, Void, Void> {
             ProgressDialog dialog;
 
             @Override
             protected void onPreExecute() {
-                dialog = ProgressDialog.show(DDaftar_Owner_2.this,"","Harap Tunggu...",true);
+                dialog = ProgressDialog.show(HEditProduk_Owner.this,"","Harap Tunggu...",true);
 
             }
 
             @Override
             protected Void doInBackground(Void... params) {
 
-                Result = getDaftarOwner2(id_user,nt,al,kt,nosurat,ar,ConvertImage);
+                Result = getEdit(jenpro,judpro,despro,harpro,ConvertImage);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result) {
                 dialog.dismiss();
-                resultDaftarOwner2(Result);
+                resultEdit(Result);
             }
         }
 
-        new daftarOwner2().execute();
+        new Edit().execute();
     }
 
-    public void resultDaftarOwner2(String HasilProses){
+    public void resultEdit(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(DDaftar_Owner_2.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(DDaftar_Owner_2.this, CLogin.class));
+            Toast.makeText(HEditProduk_Owner.this, "Produk berhasil diubah", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(HEditProduk_Owner.this, EMenu_Owner.class));
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
-            Toast.makeText(DDaftar_Owner_2.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HEditProduk_Owner.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         }else{
             Log.d("HasilProses", HasilProses);
         }
     }
 
-    public String getDaftarOwner2(String id_user, String nama_toko, String alamat_toko, String kota_toko, String no_surat, String arah, String path){
+    public String getEdit(String jenis_produk, String judul_produk, String deskripsi_produk, String harga_produk, String path){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahtoko.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/editproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
-            nvp.add(new BasicNameValuePair("id_user",id_user));
-            nvp.add(new BasicNameValuePair("nama_toko",nama_toko));
-            nvp.add(new BasicNameValuePair("alamat_toko",alamat_toko));
-            nvp.add(new BasicNameValuePair("kota_toko",kota_toko));
-            nvp.add(new BasicNameValuePair("no_surat",no_surat));
-            nvp.add(new BasicNameValuePair("arah",arah));
+            nvp.add(new BasicNameValuePair("jenis_produk",jenis_produk));
+            nvp.add(new BasicNameValuePair("judul_produk",judul_produk));
+            nvp.add(new BasicNameValuePair("deskripsi_produk",deskripsi_produk));
+            nvp.add(new BasicNameValuePair("harga_produk",harga_produk));
             nvp.add(new BasicNameValuePair("path",path));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
             HttpResponse response = client.execute(request);

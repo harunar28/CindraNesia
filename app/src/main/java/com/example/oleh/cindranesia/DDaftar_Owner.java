@@ -2,11 +2,13 @@ package com.example.oleh.cindranesia;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,13 +42,10 @@ import static android.app.Activity.RESULT_OK;
  */
 public class DDaftar_Owner extends Fragment {
 
-    EditText nama_lengkap,username,email,password,no_telp,nama_toko,no_surat;
+    EditText nama_lengkap,username,email,password,no_telp;
     Button daftar;
-    String nl,uname,mail,pass,notelp,nt,nosurat;
+    String nl,uname,mail,pass,notelp;
     String Result;
-
-    private ImageButton mSelectImage;
-    private static final int GALLERY_REQUEST = 1;
 
     public DDaftar_Owner() {
         // Required empty public constructor
@@ -59,25 +58,11 @@ public class DDaftar_Owner extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ddaftar__owner, container, false);
 
-        mSelectImage = (ImageButton) v.findViewById(R.id.gambar_izin);
-
-        mSelectImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, GALLERY_REQUEST);
-            }
-        });
-
         nama_lengkap = (EditText)v.findViewById(R.id.fname_owner);
         username = (EditText)v.findViewById(R.id.uname_owner);
         email = (EditText)v.findViewById(R.id.email_owner);
         password = (EditText)v.findViewById(R.id.pass_owner);
         no_telp = (EditText)v.findViewById(R.id.nohp_owner);
-        nama_toko = (EditText)v.findViewById(R.id.ntoko_owner);
-        no_surat = (EditText)v.findViewById(R.id.nosurat);
         daftar = (Button)v.findViewById(R.id.btndaftar_owner);
 
         daftar.setOnClickListener(new View.OnClickListener() {
@@ -88,29 +73,15 @@ public class DDaftar_Owner extends Fragment {
                 mail = email.getText().toString();
                 pass = password.getText().toString();
                 notelp = no_telp.getText().toString();
-                nt = nama_toko.getText().toString();
-                nosurat = no_surat.getText().toString();
 
-                new daftar().execute();
-                new daftartoko().execute();
+                new daftarOwner().execute();
 
             }
         });
         return v;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
-
-            Uri imageUri = data.getData();
-            mSelectImage.setImageURI(imageUri);
-
-        }
-    }
-
-    public class daftar extends AsyncTask<Void, Void, Void> {
+    public class daftarOwner extends AsyncTask<Void, Void, Void> {
         ProgressDialog dialog;
 
         @Override
@@ -122,21 +93,31 @@ public class DDaftar_Owner extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
 
-            Result = getDaftar(nl,uname,mail,pass,notelp);
+            Result = getDaftarOwner(nl,uname,mail,pass,notelp);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             dialog.dismiss();
-            resultDaftar(Result);
+            resultDaftarOwner(Result);
         }
     }
 
-    public void resultDaftar(String HasilProses){
+    public void resultDaftarOwner(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(getActivity(), "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getActivity(), CLogin.class));
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Pesan")
+                    .setMessage("Pendaftaran berhasil, klik OK untuk tahap selanjutnya.")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent a = new Intent(getActivity(), DDaftar_Owner_2.class);
+                            a.putExtra("email",mail);
+                            startActivity(a);
+                        }
+                    }).show();
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
             Toast.makeText(getActivity(), "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         }else{
@@ -144,11 +125,11 @@ public class DDaftar_Owner extends Fragment {
         }
     }
 
-    public String getDaftar(String nama_lengkap, String username, String email, String password, String no_telp){
+    public String getDaftarOwner(String nama_lengkap, String username, String email, String password, String no_telp){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
+        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahowner.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("nama_lengkap",nama_lengkap));
@@ -156,60 +137,6 @@ public class DDaftar_Owner extends Fragment {
             nvp.add(new BasicNameValuePair("email",email));
             nvp.add(new BasicNameValuePair("password",password));
             nvp.add(new BasicNameValuePair("no_telp",no_telp));
-            request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
-            HttpResponse response = client.execute(request);
-            result = request(response);
-
-        }catch (Exception ex){
-            result = "Unable To connect";
-        }
-
-        return result;
-    }
-
-    public class daftartoko extends AsyncTask<Void, Void, Void> {
-        ProgressDialog dialog;
-
-        @Override
-        protected void onPreExecute() {
-//            dialog = ProgressDialog.show(getActivity(),"","Harap Tunggu...",true);
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            Result = getDaftarToko(nt,nosurat);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            dialog.dismiss();
-            resultDaftarToko(Result);
-        }
-    }
-
-    public void resultDaftarToko(String HasilProses){
-        if(HasilProses.trim().equalsIgnoreCase("OK")){
-//            Toast.makeText(getActivity(), "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(getActivity(), CLogin.class));
-        }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
-//            Toast.makeText(getActivity(), "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
-        }else{
-            Log.d("HasilProses", HasilProses);
-        }
-    }
-
-    public String getDaftarToko(String nama_toko, String no_surat){
-        String result = "";
-
-        HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahtoko.php");
-        try{
-            List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
-            nvp.add(new BasicNameValuePair("nama_toko",nama_toko));
-            nvp.add(new BasicNameValuePair("no_surat",no_surat));
             request.setEntity(new UrlEncodedFormEntity(nvp, HTTP.UTF_8));
             HttpResponse response = client.execute(request);
             result = request(response);
