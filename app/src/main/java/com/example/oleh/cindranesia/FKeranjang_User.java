@@ -150,7 +150,7 @@ public class FKeranjang_User extends AppCompatActivity {
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
                         buku.setJumlah(JsonObj.getString("jumlah"));
-                        buku.setGambar(JsonObj.getString("gambar"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -183,8 +183,8 @@ public class FKeranjang_User extends AppCompatActivity {
                     alljumlah.add(semuaItemobj.getJumlah());
                     arrayjumlah = alljumlah.toArray(arrayjumlah);
 
-                    alljumlah.add(semuaItemobj.getJumlah());
-                    arrayjumlah = alljumlah.toArray(arrayjumlah);
+                    allgambar.add(semuaItemobj.getGambar());
+                    arraygambar = allgambar.toArray(arraygambar);
 
                 }
 

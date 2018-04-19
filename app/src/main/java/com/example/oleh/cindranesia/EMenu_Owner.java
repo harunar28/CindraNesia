@@ -293,7 +293,9 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 //                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu2:
-                startActivity(new Intent(this, FPemesanan_Owner.class));
+                Intent b = new Intent(EMenu_Owner.this, FPemesanan_Owner.class);
+                b.putExtra("id", id_toko);
+                startActivity(b);
 //                Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu3:
