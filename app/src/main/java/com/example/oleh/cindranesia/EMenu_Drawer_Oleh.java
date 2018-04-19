@@ -167,6 +167,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 data.setAlamat_toko(arrayalamat_toko[i]);
                                 data.setKota_toko(arraykota_toko[i]);
                                 data.setJenis_produk(arrayjenis_produk[i]);
+                                data.setGambar(arraygambar[i]);
 
                                 arrayItembaru.add(data);
                             }
@@ -188,6 +189,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 data.setAlamat_toko(arrayalamat_toko[i]);
                                 data.setKota_toko(arraykota_toko[i]);
                                 data.setJenis_produk(arrayjenis_produk[i]);
+                                data.setGambar(arraygambar[i]);
 
                                 arrayItembaru.add(data);
                             }
@@ -209,6 +211,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 data.setAlamat_toko(arrayalamat_toko[i]);
                                 data.setKota_toko(arraykota_toko[i]);
                                 data.setJenis_produk(arrayjenis_produk[i]);
+                                data.setGambar(arraygambar[i]);
 
                                 arrayItembaru.add(data);
                             }
@@ -230,6 +233,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
                                 data.setAlamat_toko(arrayalamat_toko[i]);
                                 data.setKota_toko(arraykota_toko[i]);
                                 data.setJenis_produk(arrayjenis_produk[i]);
+                                data.setGambar(arraygambar[i]);
 
                                 arrayItembaru.add(data);
                             }
@@ -307,8 +311,6 @@ public class EMenu_Drawer_Oleh extends Fragment {
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
                         buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
-
-                        //  intent(JsonObj.getString("idpasien"));
 
                     }
 

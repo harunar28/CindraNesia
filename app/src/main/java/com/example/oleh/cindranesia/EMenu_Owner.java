@@ -55,8 +55,8 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
     List<ItemProduk> arrayItembaru;
     AdapterProduk objAdapter;
     private ItemProduk semuaItemobj;
-    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, allgambar;
+    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arraygambar;
     ProgressBar progress;
 
     @Override
@@ -108,6 +108,21 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
 
+        if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
+            new TampilProduk().execute("http://192.168.56.10/android/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
+        }else{
+            new AlertDialog.Builder(EMenu_Owner.this)
+                    .setTitle("Failed")
+                    .setMessage("Harap Periksa Koneksi!")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Whatever...
+                        }
+                    }).show();
+        }
+
         tambahProduk = (FloatingActionButton) findViewById(R.id.menu_owner_tambah);
         tambahProduk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +143,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
         arrayid = new String[allid.size()];
         arrayidtoko = new String[allidtoko.size()];
@@ -136,21 +152,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
-
-        if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new TampilProduk().execute("http://192.168.56.10/android/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
-        }else{
-            new AlertDialog.Builder(EMenu_Owner.this)
-                    .setTitle("Failed")
-                    .setMessage("Harap Periksa Koneksi!")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Whatever...
-                        }
-                    }).show();
-        }
+        arraygambar = new String[allgambar.size()];
 
         listData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -445,7 +447,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
             if(null == hasil || hasil.length() == 0){
                 new AlertDialog.Builder(EMenu_Owner.this)
                         .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
+                        .setMessage("Tidak Ada Data!")
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -472,6 +474,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
 
                         //  intent(JsonObj.getString("idpasien"));
@@ -506,6 +509,10 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                    allgambar.add(semuaItemobj.getGambar());
+                    arraygambar = allgambar.toArray(arraygambar);
+
 
                 }
 
