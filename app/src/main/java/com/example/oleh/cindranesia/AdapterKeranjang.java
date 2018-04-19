@@ -56,14 +56,14 @@ public class AdapterKeranjang extends ArrayAdapter<ItemKeranjang> {
         holder.alamat_toko = (TextView) view.findViewById(R.id.alamat_toko);
         holder.kota_toko = (TextView) view.findViewById(R.id.kota_toko);
         holder.jenis_produk = (TextView) view.findViewById(R.id.jenis_produk);
-        holder.jumlah = (TextView) view.findViewById(R.id.jumlah);
+        holder.jumlah = (TextView) view.findViewById(R.id.itemkeranjang_jumlah_pesan);
         holder.gmb = (ImageView) view.findViewById(R.id.gambar);
 
-        Picasso
-                .with(activity)
-                .load(semuaobj.getGambar().toString())
-                .fit()
-                .into(holder.gmb);
+//        Picasso
+//                .with(activity)
+//                .load(semuaobj.getGambar().toString())
+//                .fit()
+//                .into(holder.gmb);
 
         holder.judul_produk.setText(semuaobj.getJudul_produk().toString());
         holder.nama_toko.setText(semuaobj.getNama_toko().toString());

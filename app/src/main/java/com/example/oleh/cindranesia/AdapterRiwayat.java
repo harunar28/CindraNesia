@@ -60,11 +60,11 @@ public class AdapterRiwayat extends ArrayAdapter<ItemRiwayatUser> {
         holder.tanggal = (TextView) view.findViewById(R.id.itemriwayat_tgl);
         holder.gmb = (ImageView) view.findViewById(R.id.gambar);
 
-        Picasso
-                .with(activity)
-                .load(semuaobj.getGambar().toString())
-                .fit()
-                .into(holder.gmb);
+//        Picasso
+//                .with(activity)
+//                .load(semuaobj.getGambar().toString())
+//                .fit()
+//                .into(holder.gmb);
 
         holder.judul_produk.setText(semuaobj.getJudul_produk().toString());
         holder.nama_toko.setText(semuaobj.getNama_toko().toString());

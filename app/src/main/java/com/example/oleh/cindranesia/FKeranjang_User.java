@@ -68,7 +68,7 @@ public class FKeranjang_User extends AppCompatActivity {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilkeranjang.php?id_user="+id);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampilkeranjang.php?id_user="+id);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")

@@ -1,12 +1,14 @@
 package com.example.oleh.cindranesia;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +41,7 @@ public class HTambahProduk_Owner extends AppCompatActivity {
 
     EditText jenis_produk,judul_produk,deskripsi_produk,harga_produk;
     Button simpan;
-    String jenpro,judpro,despro,harpro,id_toko;
+    String jenpro,judpro,despro,harpro,id_toko,id_user;
     String Result;
 
     Bitmap bitmap;
@@ -62,6 +64,7 @@ public class HTambahProduk_Owner extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         id_toko = getIntent().getExtras().getString("id_toko");
+        id_user = getIntent().getExtras().getString("id_user");
 
         jenis_produk = (EditText)findViewById(R.id.tambah_produk_jenis);
         judul_produk = (EditText)findViewById(R.id.tambah_produk_judul);
@@ -69,6 +72,22 @@ public class HTambahProduk_Owner extends AppCompatActivity {
         harga_produk = (EditText)findViewById(R.id.tambah_produk_harga);
         mSelectImage = (ImageButton) findViewById(R.id.tambah_produk_img);
         simpan = (Button)findViewById(R.id.tambah_produk_btnsimpan);
+
+        jenis_produk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(HTambahProduk_Owner.this)
+                        .setTitle("Jenis Produk")
+                        .setItems(R.array.jenis, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                jenis_produk.setText(getResources().getStringArray(R.array.jenis)[which]);
+                            }
+                        })
+                        .show();
+            }
+        });
 
         mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +177,10 @@ public class HTambahProduk_Owner extends AppCompatActivity {
     public void resultSimpan(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
             Toast.makeText(HTambahProduk_Owner.this, "Produk berhasil ditambahkan", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(HTambahProduk_Owner.this, EMenu_Owner.class));
+            Intent a = new Intent(HTambahProduk_Owner.this, EMenu_Owner.class);
+            a.putExtra("id",id_user);
+            startActivity(a);
+            finish();
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
             Toast.makeText(HTambahProduk_Owner.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
         }else{
@@ -170,7 +192,7 @@ public class HTambahProduk_Owner extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahproduk.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_toko",id_toko));

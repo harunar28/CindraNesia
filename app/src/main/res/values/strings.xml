@@ -13,4 +13,11 @@
         <item>Nama Produk</item>
         <item>Nama Toko</item>
     </string-array>
+
+
+    <string-array name="jenis">
+        <item>Makanan</item>
+        <item>Barang</item>
+        <item>Minuman</item>
+    </string-array>
 </resources>

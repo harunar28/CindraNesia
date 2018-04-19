@@ -77,7 +77,7 @@ public class DDaftar_Owner_2 extends AppCompatActivity {
         mSelectImage = (ImageButton) findViewById(R.id.gambar_surat);
 
         if(JsonUtils.isNetworkAvailable(DDaftar_Owner_2.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilidowner.php?email="+email);
+            new Tampil().execute("http://10.100.100.4/cindranesia/tampilidowner.php?email="+email);
         }else{
             Toast.makeText(DDaftar_Owner_2.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -239,7 +239,7 @@ public class DDaftar_Owner_2 extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahtoko.php");
+        HttpPost request = new HttpPost("http://10.100.100.4/cindranesia/tambahtoko.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",id_user));

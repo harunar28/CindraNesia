@@ -86,7 +86,7 @@ public class EMenu_Drawer_Oleh extends Fragment {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(getActivity())){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampiloleh.php");
         }else{
             new AlertDialog.Builder(getActivity())
                     .setTitle("Failed")

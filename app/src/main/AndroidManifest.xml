@@ -30,7 +30,6 @@
         <activity android:name=".EMenu_Drawer" />
         <activity android:name=".EMenu_Owner" />
         <activity android:name=".FDetail_Oleh" />
-        <activity android:name=".ItemProduk" />
         <activity android:name=".FFavorit_User" />
         <activity android:name=".FKeranjang_User" />
         <activity android:name=".FRiwayat_User" />
@@ -40,8 +39,6 @@
         <activity android:name=".FPemesanan_Owner" />
         <activity android:name=".FTentang" />
         <activity android:name=".DDaftar_Owner_2" />
-        <activity android:name=".ItemRiwayatUser" />
-        <activity android:name=".ItemPemesananOwner" />
         <activity android:name=".HEditProduk_Owner" />
         <activity android:name=".HTambahProduk_Owner" />
         <activity android:name=".HEdit_produk"></activity>

@@ -85,7 +85,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
         email = (TextView)header.findViewById(R.id.email_user);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Drawer.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampildrawer.php?id_user="+id_user);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampildrawer.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Drawer.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }

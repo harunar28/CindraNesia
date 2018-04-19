@@ -28,13 +28,21 @@ import java.util.List;
  */
 public class EMenu_Drawer_Populer extends Fragment {
 
+
     GridView listData;
     List<ItemProduk> arrayItembaru;
     AdapterProduk objAdapter;
     private ItemProduk semuaItemobj;
-    ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk;
-    String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk;
+    ArrayList<String> allidtoko, allid, alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, allgambar;
+    String[] arrayidtoko, arrayid, arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arraygambar;
     ProgressBar progress;
+    EditText by;
+
+    String data;
+
+    int textlength = 0;
+
+    SearchView search;
 
     View v;
 
@@ -54,18 +62,23 @@ public class EMenu_Drawer_Populer extends Fragment {
         listData = (GridView)v.findViewById(R.id.menu_drawer_populer_grid);
         arrayItembaru = new ArrayList<ItemProduk>();
 
+        allid = new ArrayList<String>();
+        allidtoko = new ArrayList<String>();
         alljudul_produk = new ArrayList<String>();
         allnama_toko = new ArrayList<String>();
         allalamat_toko = new ArrayList<String>();
         allkota_toko = new ArrayList<String>();
         alljenis_produk = new ArrayList<String>();
+        allgambar = new ArrayList<String>();
 
+        arrayid = new String[allid.size()];
+        arrayidtoko = new String[allidtoko.size()];
         arrayjudul_produk = new String[alljudul_produk.size()];
         arraynama_toko = new String[allnama_toko.size()];
         arrayalamat_toko = new String[allalamat_toko.size()];
         arraykota_toko = new String[allkota_toko.size()];
         arrayjenis_produk = new String[alljenis_produk.size()];
-
+        arraygambar = new String[allgambar.size()];
         if(JsonUtils.isNetworkAvailable(getActivity())){
             new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
         }else{
@@ -140,14 +153,16 @@ public class EMenu_Drawer_Populer extends Fragment {
                         JsonObj = jsonArray.getJSONObject(i);
 
                         ItemProduk buku = new ItemProduk();
+
+                        buku.setId(JsonObj.getString("id_produk"));
+                        buku.setIdtoko(JsonObj.getString("id_toko"));
                         buku.setJudul_produk(JsonObj.getString("judul_produk"));
                         buku.setNama_toko(JsonObj.getString("nama_toko"));
                         buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
                         buku.setKota_toko(JsonObj.getString("kota_toko"));
                         buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                        buku.setGambar(JsonObj.getString("path"));
                         arrayItembaru.add(buku);
-
-                        //  intent(JsonObj.getString("idpasien"));
 
                     }
 
@@ -158,6 +173,12 @@ public class EMenu_Drawer_Populer extends Fragment {
                 for(int j=0;j<arrayItembaru.size();j++){
 
                     semuaItemobj = arrayItembaru.get(j);
+
+                    allid.add(semuaItemobj.getId());
+                    arrayid = allid.toArray(arrayid);
+
+                    allidtoko.add(semuaItemobj.getIdtoko());
+                    arrayidtoko = allidtoko.toArray(arrayidtoko);
 
                     alljudul_produk.add(semuaItemobj.getJudul_produk());
                     arrayjudul_produk = alljudul_produk.toArray(arrayjudul_produk);
@@ -173,6 +194,9 @@ public class EMenu_Drawer_Populer extends Fragment {
 
                     alljenis_produk.add(semuaItemobj.getJenis_produk());
                     arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                    allgambar.add(semuaItemobj.getGambar());
+                    arraygambar = allgambar.toArray(arraygambar);
 
                 }
 

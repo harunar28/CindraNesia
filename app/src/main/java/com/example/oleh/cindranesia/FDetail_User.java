@@ -85,7 +85,7 @@ public class FDetail_User extends AppCompatActivity {
         idtoko = getIntent().getExtras().getString("idtoko");
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php?id="+idproduk);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampildetail_user.php?id_produk="+idproduk);
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -116,7 +116,7 @@ public class FDetail_User extends AppCompatActivity {
         arrayulasan = new String[allulasan.size()];
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new TampilUlasan().execute("http://192.168.56.10/android/cindranesia/tampilulasan.php?id_produk="+idproduk);
+            new TampilUlasan().execute("http://10.10.100.4/cindranesia/tampilulasan.php?id_produk="+idproduk);
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -230,21 +230,21 @@ public class FDetail_User extends AppCompatActivity {
 
                         JsonObj = jsonArray.getJSONObject(i);
 
-                        judul.setText(JsonObj.getString("judul"));
+                        judul.setText(JsonObj.getString("judul_produk"));
                         desk.setText(JsonObj.getString("deskripsi"));
-                        nama.setText(JsonObj.getString("nama"));
-                        alamat.setText(JsonObj.getString("alamat"));
-                        kota.setText(JsonObj.getString("kota"));
+                        nama.setText(JsonObj.getString("nama_toko"));
+                        alamat.setText(JsonObj.getString("alamat_toko"));
+                        kota.setText(JsonObj.getString("kota_toko"));
                         arah.setText(JsonObj.getString("arah"));
-                        harga.setText(JsonObj.getString("harga"));
+                        harga.setText(JsonObj.getString("harga_produk"));
 
-                        String path = JsonObj.getString("path");
-
-                        Picasso
-                                .with(FDetail_User.this)
-                                .load(path)
-                                .fit()
-                                .into(image);
+//                        String path = JsonObj.getString("path");
+//
+//                        Picasso
+//                                .with(FDetail_User.this)
+//                                .load(path)
+//                                .fit()
+//                                .into(image);
 
                     }
 
@@ -282,16 +282,7 @@ public class FDetail_User extends AppCompatActivity {
             }
 
             if(null == hasil || hasil.length() == 0){
-                new AlertDialog.Builder(FDetail_User.this)
-                        .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Whatever...
-                            }
-                        }).show();
+
                 progress.setVisibility(View.GONE);
             }else{
                 try {
@@ -328,7 +319,7 @@ public class FDetail_User extends AppCompatActivity {
                     arraynama = allnama.toArray(arraynama);
 
                     allulasan.add(semuaItemobj.getUlasan());
-                    arrayulasan = allnama.toArray(arrayulasan);
+                    arrayulasan = allulasan.toArray(arrayulasan);
 
 
                 }
@@ -396,7 +387,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahkeranjang.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahkeranjang.php");
         try {
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user", iduser));
@@ -465,7 +456,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahfavorit.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahfavorit.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",iduser));
@@ -533,7 +524,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/tambahulasan.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahulasan.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",iduser));

@@ -48,6 +48,12 @@ public class FPemesanan_Owner extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
+        progress = (ProgressBar)findViewById(R.id.pemesanan_owner_progbar);
+        listData = (GridView) findViewById(R.id.pemesanan_owner_grid);
+
+        arrayItembaru = new ArrayList<ItemPemesananOwner>();
+
+
         allnama = new ArrayList<String>();
         alljudul = new ArrayList<String>();
         alljumlah = new ArrayList<String>();
@@ -59,7 +65,7 @@ public class FPemesanan_Owner extends AppCompatActivity {
         arraytanggal = new String[alltanggal.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampilpemesanan.php?id_toko="+id_toko);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampilpemesanan.php?id_toko="+id_toko);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")

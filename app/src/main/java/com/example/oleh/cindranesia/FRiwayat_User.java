@@ -28,12 +28,15 @@ public class FRiwayat_User extends AppCompatActivity {
     ArrayList<String> alljudul_produk, allnama_toko, allalamat_toko, allkota_toko, alljenis_produk, alljumlah, alltanggal, allgambar;
     String[] arrayjudul_produk, arraynama_toko, arrayalamat_toko, arraykota_toko, arrayjenis_produk, arrayjumlah, arraytanggal, arraygambar;
     ProgressBar progress;
+    String iduser;
     Toolbar tb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friwayat__user);
+
+        iduser = getIntent().getExtras().getString("id");
 
         //toolbar
         tb = (Toolbar) findViewById(R.id.riwayat_user_tool);
@@ -67,7 +70,7 @@ public class FRiwayat_User extends AppCompatActivity {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampilriwayat.php?id_user="+iduser);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")

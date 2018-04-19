@@ -45,6 +45,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
     EditText jenis_produk,judul_produk,deskripsi_produk,harga_produk;
     Button edit;
     String jenpro,judpro,despro,harpro,id;
+    String path;
     String Result;
 
     Bitmap bitmap;
@@ -55,7 +56,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hedit_produk__owner);
+        setContentView(R.layout.activity_hedit_produk);
 
         //toolbar
         tb = (Toolbar) findViewById(R.id.edit_produk_tool);
@@ -72,7 +73,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
         deskripsi_produk = (EditText)findViewById(R.id.edit_produk_deskripsi);
         harga_produk = (EditText)findViewById(R.id.edit_produk_harga);
         mSelectImage = (ImageButton) findViewById(R.id.edit_produk_img);
-        edit = (Button)findViewById(R.id.tambah_produk_btnsimpan);
+        edit = (Button)findViewById(R.id.edit_produk_btnedit);
 
         mSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +97,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
         });
 
         if(JsonUtils.isNetworkAvailable(HEditProduk_Owner.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampileditproduk.php?id_produk="+id);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampileditproduk.php?id_produk="+id);
         }else{
             Toast.makeText(HEditProduk_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -149,13 +150,13 @@ public class HEditProduk_Owner extends AppCompatActivity {
                         judul_produk.setText(JsonObj.getString("judul_produk"));
                         deskripsi_produk.setText(JsonObj.getString("deskripsi_produk"));
                         harga_produk.setText(JsonObj.getString("harga_produk"));
-                        String path = JsonObj.getString("path_produk");
+                        path = JsonObj.getString("path_produk");
 
-                        Picasso
-                                .with(HEditProduk_Owner.this)
-                                .load(path)
-                                .fit()
-                                .into(mSelectImage);
+//                        Picasso
+//                                .with(HEditProduk_Owner.this)
+//                                .load(path)
+//                                .fit()
+//                                .into(mSelectImage);
 
                     }
 
@@ -211,7 +212,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
             @Override
             protected Void doInBackground(Void... params) {
 
-                Result = getEdit(jenpro,judpro,despro,harpro,ConvertImage);
+                Result = getEdit(id,jenpro,judpro,despro,harpro,ConvertImage);
                 return null;
             }
 
@@ -236,13 +237,14 @@ public class HEditProduk_Owner extends AppCompatActivity {
         }
     }
 
-    public String getEdit(String jenis_produk, String judul_produk, String deskripsi_produk, String harga_produk, String path){
+    public String getEdit(String id_produk,String jenis_produk, String judul_produk, String deskripsi_produk, String harga_produk, String path){
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/editproduk.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/editproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
+            nvp.add(new BasicNameValuePair("id_produk",id_produk));
             nvp.add(new BasicNameValuePair("jenis_produk",jenis_produk));
             nvp.add(new BasicNameValuePair("judul_produk",judul_produk));
             nvp.add(new BasicNameValuePair("deskripsi_produk",deskripsi_produk));

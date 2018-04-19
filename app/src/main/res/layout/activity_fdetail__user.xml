@@ -248,7 +248,7 @@
                     android:textColor="#ffffff" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
@@ -258,6 +258,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ulasan : "
+                    android:id="@+id/ulas"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
 
@@ -265,6 +266,7 @@
                     android:id="@+id/detail_user_ulasan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/ulas"
                     android:background="@drawable/field_merah"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
@@ -273,34 +275,33 @@
                     android:id="@+id/detail_user_btnKirim"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/detail_user_ulasan"
                     android:layout_marginLeft="260dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/btndaftar"
                     android:text="Kirim"
                     android:textColor="#fff" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
 
                     <ProgressBar
                         android:id="@+id/progres_ulasan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/detail_user_btnKirim"
                         android:layout_centerVertical="true"
                         />
-
                     <GridView
                         android:id="@+id/detail_user_grid"
                         android:layout_width="match_parent"
+                        android:layout_below="@+id/detail_user_btnKirim"
                         android:layout_height="wrap_content"
                         android:numColumns="1"
                         android:padding="5dp"></GridView>
-                </RelativeLayout>
 
-            </LinearLayout>
+
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -97,31 +97,18 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         email = (TextView)header.findViewById(R.id.email_owner);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampildrawer.php?id_user="+id_user);
+            new Tampil().execute("http://10.10.100.4/cindranesia/tampildrawer.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil2().execute("http://192.168.56.10/android/cindranesia/tampilidtoko.php?id_user="+id_user);
+            new Tampil2().execute("http://10.10.100.4/cindranesia/tampilidtoko.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
 
-        if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new TampilProduk().execute("http://192.168.56.10/android/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
-        }else{
-            new AlertDialog.Builder(EMenu_Owner.this)
-                    .setTitle("Failed")
-                    .setMessage("Harap Periksa Koneksi!")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Whatever...
-                        }
-                    }).show();
-        }
+
 
         tambahProduk = (FloatingActionButton) findViewById(R.id.menu_owner_tambah);
         tambahProduk.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +116,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
             public void onClick(View v) {
                 Intent a = new Intent(EMenu_Owner.this, HTambahProduk_Owner.class);
                 a.putExtra("id_toko",id_toko);
+                a.putExtra("id_user",id_user);
                 startActivity(a);
             }
         });
@@ -253,7 +241,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://192.168.56.10/android/cindranesia/hapusproduk.php");
+        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/hapusproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id",id));
@@ -410,6 +398,21 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 
                         id_toko = JsonObj.getString("id_toko");
 
+                        if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
+                            new TampilPr().execute("http://10.10.100.4/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
+                        }else{
+                            new AlertDialog.Builder(EMenu_Owner.this)
+                                    .setTitle("Failed")
+                                    .setMessage("Harap Periksa Koneksi!")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Whatever...
+                                        }
+                                    }).show();
+                        }
+
                     }
 
                 } catch (JSONException e) {
@@ -421,106 +424,104 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
     }
 
 
-    public class TampilProduk extends AsyncTask<String, Void, String> {
+
+        public class TampilPr extends AsyncTask<String, Void, String> {
 
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            return JsonUtils.getJSONString(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String hasil) {
-            super.onPostExecute(hasil);
-
-
-
-            if (null != progress) {
-                progress.setVisibility(View.GONE);
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
             }
 
-            if(null == hasil || hasil.length() == 0){
-                new AlertDialog.Builder(EMenu_Owner.this)
-                        .setTitle("Failed")
-                        .setMessage("Tidak Ada Data!")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Whatever...
-                            }
-                        }).show();
-                progress.setVisibility(View.GONE);
-            }else{
-                try {
-                    JSONObject JsonUtama =  new JSONObject(hasil);
-                    JSONArray jsonArray = JsonUtama.getJSONArray("data");
-                    JSONObject JsonObj = null;
-                    for(int i = 0;i < jsonArray.length();i++){
+            @Override
+            protected String doInBackground(String... params) {
+                return JsonUtils.getJSONString(params[0]);
+            }
 
-                        JsonObj = jsonArray.getJSONObject(i);
+            @Override
+            protected void onPostExecute(String hasil) {
+                super.onPostExecute(hasil);
 
-                        ItemProduk buku = new ItemProduk();
 
-                        buku.setId(JsonObj.getString("id_produk"));
-                        buku.setIdtoko(JsonObj.getString("id_toko"));
-                        buku.setJudul_produk(JsonObj.getString("judul_produk"));
-                        buku.setNama_toko(JsonObj.getString("nama_toko"));
-                        buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
-                        buku.setKota_toko(JsonObj.getString("kota_toko"));
-                        buku.setJenis_produk(JsonObj.getString("jenis_produk"));
-                        buku.setGambar(JsonObj.getString("path"));
-                        arrayItembaru.add(buku);
+                if (null != progress) {
+                    progress.setVisibility(View.GONE);
+                }
 
-                        //  intent(JsonObj.getString("idpasien"));
+                if (null == hasil || hasil.length() == 0) {
+                    new AlertDialog.Builder(EMenu_Owner.this)
+                            .setTitle("Failed")
+                            .setMessage("Tidak Ada Data!")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Whatever...
+                                }
+                            }).show();
+                    progress.setVisibility(View.GONE);
+                } else {
+                    try {
+                        JSONObject JsonUtama = new JSONObject(hasil);
+                        JSONArray jsonArray = JsonUtama.getJSONArray("data");
+                        JSONObject JsonObj = null;
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JsonObj = jsonArray.getJSONObject(i);
+
+                            ItemProduk buku = new ItemProduk();
+
+                            buku.setId(JsonObj.getString("id_produk"));
+                            buku.setIdtoko(JsonObj.getString("id_toko"));
+                            buku.setJudul_produk(JsonObj.getString("judul_produk"));
+                            buku.setNama_toko(JsonObj.getString("nama_toko"));
+                            buku.setAlamat_toko(JsonObj.getString("alamat_toko"));
+                            buku.setKota_toko(JsonObj.getString("kota_toko"));
+                            buku.setJenis_produk(JsonObj.getString("jenis_produk"));
+                            buku.setGambar(JsonObj.getString("path"));
+                            arrayItembaru.add(buku);
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int j = 0; j < arrayItembaru.size(); j++) {
+
+                        semuaItemobj = arrayItembaru.get(j);
+
+                        allid.add(semuaItemobj.getId());
+                        arrayid = allid.toArray(arrayid);
+
+                        allidtoko.add(semuaItemobj.getIdtoko());
+                        arrayidtoko = allidtoko.toArray(arrayidtoko);
+
+                        alljudul_produk.add(semuaItemobj.getJudul_produk());
+                        arrayjudul_produk = alljudul_produk.toArray(arrayjudul_produk);
+
+                        allnama_toko.add(semuaItemobj.getNama_toko());
+                        arraynama_toko = allnama_toko.toArray(arraynama_toko);
+
+                        allalamat_toko.add(semuaItemobj.getAlamat_toko());
+                        arrayalamat_toko = allalamat_toko.toArray(arrayalamat_toko);
+
+                        allkota_toko.add(semuaItemobj.getKota_toko());
+                        arraykota_toko = allkota_toko.toArray(arraykota_toko);
+
+                        alljenis_produk.add(semuaItemobj.getJenis_produk());
+                        arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
+
+                        allgambar.add(semuaItemobj.getGambar());
+                        arraygambar = allgambar.toArray(arraygambar);
 
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                for(int j=0;j<arrayItembaru.size();j++){
-
-                    semuaItemobj = arrayItembaru.get(j);
-
-                    allid.add(semuaItemobj.getId());
-                    arrayid = allid.toArray(arrayid);
-
-                    allidtoko.add(semuaItemobj.getIdtoko());
-                    arrayidtoko = allidtoko.toArray(arrayidtoko);
-
-                    alljudul_produk.add(semuaItemobj.getJudul_produk());
-                    arrayjudul_produk = alljudul_produk.toArray(arrayjudul_produk);
-
-                    allnama_toko.add(semuaItemobj.getNama_toko());
-                    arraynama_toko = allnama_toko.toArray(arraynama_toko);
-
-                    allalamat_toko.add(semuaItemobj.getAlamat_toko());
-                    arrayalamat_toko = allalamat_toko.toArray(arrayalamat_toko);
-
-                    allkota_toko.add(semuaItemobj.getKota_toko());
-                    arraykota_toko = allkota_toko.toArray(arraykota_toko);
-
-                    alljenis_produk.add(semuaItemobj.getJenis_produk());
-                    arrayjenis_produk = alljenis_produk.toArray(arrayjenis_produk);
-
-                    allgambar.add(semuaItemobj.getGambar());
-                    arraygambar = allgambar.toArray(arraygambar);
-
+                    setAllAdapter();
 
                 }
-
-                setAllAdapter();
-
             }
         }
-    }
+
 
     public void setAllAdapter(){
         objAdapter = new AdapterProduk(EMenu_Owner.this,R.layout.item_produk,arrayItembaru);
