@@ -71,7 +71,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
 
         View header = view.getHeaderView(0);
 
-        ImageView profile = (ImageView) header.findViewById(R.id.avatar_user);
+        profile = (ImageView) header.findViewById(R.id.avatar_user);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
         email = (TextView)header.findViewById(R.id.email_user);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Drawer.this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampildrawer.php?id_user="+id_user);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampildrawer.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Drawer.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -125,7 +125,7 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
                             .setCancelable(false).setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            EMenu_Drawer.this.finish();
+                            startActivity(new Intent(EMenu_Drawer.this, CLogin.class));
                         }
                     })
                             .setNegativeButton("Tidak", null)
@@ -177,14 +177,15 @@ public class EMenu_Drawer extends AppCompatActivity implements NavigationView.On
                         nama.setText(JsonObj.getString("nama_lengkap"));
                         email.setText(JsonObj.getString("email"));
 
-
-                        Picasso
-                                .with(EMenu_Drawer.this)
-                                .load(JsonObj.getString("path_profil"))
-                                .fit()
-                                .into(profile);
-
-
+                        if(JsonObj.getString("path_profil").equals("")){
+                            profile.setImageResource(R.drawable.default_avatar);
+                        }else{
+                            Picasso
+                                    .with(EMenu_Drawer.this)
+                                    .load(JsonObj.getString("path_profil"))
+                                    .fit()
+                                    .into(profile);
+                        }
                     }
 
                 } catch (JSONException e) {

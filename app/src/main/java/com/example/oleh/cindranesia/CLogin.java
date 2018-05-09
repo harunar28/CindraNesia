@@ -48,7 +48,7 @@ public class CLogin extends AppCompatActivity {
                 us = user.getText().toString();
                 ps = pass.getText().toString();
                 if(JsonUtils.isNetworkAvailable(CLogin.this)){
-                    new Tampil().execute("http://10.10.100.4/cindranesia/login.php?user="+us+"&pass="+ps);
+                    new Tampil().execute("https://cindranesia.000webhostapp.com/login.php?user="+us+"&pass="+ps);
                 }else{
                     new AlertDialog.Builder(CLogin.this)
                             .setTitle("Failed")
@@ -131,6 +131,7 @@ public class CLogin extends AppCompatActivity {
                                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            finish();
                                             Intent a = new Intent(CLogin.this, EMenu_Drawer.class);
                                             a.putExtra("id",id_user);
                                             startActivity(a);
@@ -144,6 +145,7 @@ public class CLogin extends AppCompatActivity {
                                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            finish();
                                             Intent a = new Intent(CLogin.this, EMenu_Owner.class);
                                             a.putExtra("id",id_user);
                                             startActivity(a);

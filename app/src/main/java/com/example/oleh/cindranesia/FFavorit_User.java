@@ -1,6 +1,7 @@
 package com.example.oleh.cindranesia;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -67,7 +68,7 @@ public class FFavorit_User extends AppCompatActivity {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampilfavorit.php?id_user="+id);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilfavorit.php?id_user="+id);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
@@ -86,9 +87,13 @@ public class FFavorit_User extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 semuaItemobj = arrayItembaru.get(position);
 
-//                String ide = semuaItemobj.getIdpasien();
-//                Intent a = new Intent(DataPasien.this ,DetailPasien.class);
-//                a.putExtra("idpasien",ide);
+//                String ide = semuaItemobj.getId();
+//                String idtoko = semuaItemobj.getIdtoko();
+//
+//                Intent a = new Intent(FFavorit_User.this ,FDetail_User.class);
+//                a.putExtra("idtoko",idtoko);
+//                a.putExtra("idproduk",ide);
+//                a.putExtra("iduser",id);
 //                startActivity(a);
             }
         });
@@ -125,8 +130,8 @@ public class FFavorit_User extends AppCompatActivity {
 
             if(null == hasil || hasil.length() == 0){
                 new AlertDialog.Builder(FFavorit_User.this)
-                        .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
+                        .setTitle("Pesan")
+                        .setMessage("Maaf Anda belum memfavoritkan produk!")
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

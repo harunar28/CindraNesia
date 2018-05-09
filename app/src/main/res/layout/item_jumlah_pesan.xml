@@ -8,6 +8,7 @@
         android:layout_height="40dp"
         android:layout_margin="30dp"
         android:id="@+id/jumlah"
+        android:padding="10dp"
         android:background="@drawable/field_merah"/>
 
 </RelativeLayout>

@@ -23,6 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -50,6 +52,8 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 
     String id_user,Result,id,id_toko;
     TextView nama,email,text1;
+
+    ImageView profile;
 
     GridView listData;
     List<ItemProduk> arrayItembaru;
@@ -83,7 +87,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         view.setNavigationItemSelectedListener(this);
 
         View header = view.getHeaderView(0);
-        ImageView profile = (ImageView) header.findViewById(R.id.avatar_owner);
+        profile = (ImageView) header.findViewById(R.id.avatar_owner);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,13 +101,13 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         email = (TextView)header.findViewById(R.id.email_owner);
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampildrawer.php?id_user="+id_user);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampildrawer.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
 
         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-            new Tampil2().execute("http://10.10.100.4/cindranesia/tampilidtoko.php?id_user="+id_user);
+            new Tampil2().execute("https://cindranesia.000webhostapp.com/tampilidtoko.php?id_user="+id_user);
         }else{
             Toast.makeText(EMenu_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -241,7 +245,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/hapusproduk.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/hapusproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id",id));
@@ -297,7 +301,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
                         .setCancelable(false).setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EMenu_Owner.this.finish();
+                        startActivity(new Intent(EMenu_Owner.this, CLogin.class));
                     }
                 })
                         .setNegativeButton("Tidak", null)
@@ -348,7 +352,15 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
                         nama.setText(JsonObj.getString("nama_lengkap"));
                         email.setText(JsonObj.getString("email"));
 
-
+                        if(JsonObj.getString("path_profil").equals("")){
+                            profile.setImageResource(R.drawable.default_avatar);
+                        }else{
+                            Picasso
+                                    .with(EMenu_Owner.this)
+                                    .load(JsonObj.getString("path_profil"))
+                                    .fit()
+                                    .into(profile);
+                        }
                     }
 
                 } catch (JSONException e) {
@@ -399,7 +411,7 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
                         id_toko = JsonObj.getString("id_toko");
 
                         if(JsonUtils.isNetworkAvailable(EMenu_Owner.this)){
-                            new TampilPr().execute("http://10.10.100.4/cindranesia/tampiloleh_owner.php?id_toko="+id_toko);
+                            new TampilPr().execute("https://cindranesia.000webhostapp.com/tampiloleh_owner.php?id_toko="+id_toko);
                         }else{
                             new AlertDialog.Builder(EMenu_Owner.this)
                                     .setTitle("Failed")
@@ -449,8 +461,8 @@ public class EMenu_Owner extends AppCompatActivity implements NavigationView.OnN
 
                 if (null == hasil || hasil.length() == 0) {
                     new AlertDialog.Builder(EMenu_Owner.this)
-                            .setTitle("Failed")
-                            .setMessage("Tidak Ada Data!")
+                            .setTitle("Pesan")
+                            .setMessage("Belum ada produk!")
                             .setCancelable(false)
                             .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override

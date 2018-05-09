@@ -70,7 +70,7 @@ public class FRiwayat_User extends AppCompatActivity {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampilriwayat.php?id_user="+iduser);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilriwayat.php?id_user="+iduser);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
@@ -128,8 +128,8 @@ public class FRiwayat_User extends AppCompatActivity {
 
             if(null == hasil || hasil.length() == 0){
                 new AlertDialog.Builder(FRiwayat_User.this)
-                        .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
+                        .setTitle("Pesan")
+                        .setMessage("Maaf Anda belum melakukan pemesanan!")
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

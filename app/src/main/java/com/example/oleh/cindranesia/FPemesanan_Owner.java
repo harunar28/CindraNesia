@@ -65,7 +65,7 @@ public class FPemesanan_Owner extends AppCompatActivity {
         arraytanggal = new String[alltanggal.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampilpemesanan.php?id_toko="+id_toko);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilpemesanan.php?id_toko="+id_toko);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
@@ -110,8 +110,8 @@ public class FPemesanan_Owner extends AppCompatActivity {
 
             if(null == hasil || hasil.length() == 0){
                 new AlertDialog.Builder(FPemesanan_Owner.this)
-                        .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
+                        .setTitle("Pesan")
+                        .setMessage("Maaf belum ada pemesanan produk!")
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

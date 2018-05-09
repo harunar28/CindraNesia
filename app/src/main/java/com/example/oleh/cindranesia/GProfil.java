@@ -94,7 +94,7 @@ public class GProfil extends AppCompatActivity {
         update = (Button) findViewById(R.id.profil_btn_simpan);
 
         if(JsonUtils.isNetworkAvailable(GProfil.this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampilprofil.php?id_user="+id_user);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilprofil.php?id_user="+id_user);
         }else{
             Toast.makeText(GProfil.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -192,7 +192,7 @@ public class GProfil extends AppCompatActivity {
                         path = JsonObj.getString("path_profil");
 
                         if(path.equals("")){
-                            image.setImageResource(R.drawable.flat_hijab);
+                            image.setImageResource(R.drawable.default_avatar);
                         }else{
                             Picasso
                                     .with(GProfil.this)
@@ -251,7 +251,8 @@ public class GProfil extends AppCompatActivity {
 
     public void resultUpdate(String HasilProses){
         if(HasilProses.trim().equalsIgnoreCase("OK")){
-            Toast.makeText(GProfil.this, "Pendaftaran berhasil", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GProfil.this, "Profil berhasil diupdate!", Toast.LENGTH_SHORT).show();
+            startActivity(getIntent());
 //            startActivity(new Intent(GProfil.this, CLogin.class));
         }else if(HasilProses.trim().equalsIgnoreCase("Failed")){
             Toast.makeText(GProfil.this, "Data Gagal Or Failed", Toast.LENGTH_SHORT).show();
@@ -264,7 +265,7 @@ public class GProfil extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/updateprofil.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/updateprofil.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",id));

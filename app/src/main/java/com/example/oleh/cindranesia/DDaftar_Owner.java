@@ -129,7 +129,7 @@ public class DDaftar_Owner extends Fragment {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahowner.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahowner.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("nama_lengkap",nama_lengkap));

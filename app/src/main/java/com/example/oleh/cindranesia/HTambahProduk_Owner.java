@@ -192,7 +192,7 @@ public class HTambahProduk_Owner extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahproduk.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_toko",id_toko));

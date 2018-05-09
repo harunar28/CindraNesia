@@ -80,7 +80,7 @@ public class EMenu_Drawer_Populer extends Fragment {
         arrayjenis_produk = new String[alljenis_produk.size()];
         arraygambar = new String[allgambar.size()];
         if(JsonUtils.isNetworkAvailable(getActivity())){
-            new Tampil().execute("http://192.168.56.10/android/cindranesia/tampiloleh.php");
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampiloleh.php");
         }else{
             new AlertDialog.Builder(getActivity())
                     .setTitle("Failed")

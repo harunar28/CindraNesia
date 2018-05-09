@@ -33,7 +33,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="2018/19/04"
-                        android:textSize="20sp"
                         android:textColor="@color/colorPrimary" />
                 </RelativeLayout>
 
@@ -51,7 +50,6 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Harun"
-                        android:textSize="20sp"
                         android:textColor="#fff" />
 
                     <TextView
@@ -62,7 +60,6 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Harun"
-                        android:textSize="20sp"
                         android:textColor="#fff" />
 
                     <TextView
@@ -74,7 +71,6 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Harun"
-                        android:textSize="20sp"
                         android:layout_marginBottom="10dp"
                         android:textColor="#fff" />
                 </RelativeLayout>

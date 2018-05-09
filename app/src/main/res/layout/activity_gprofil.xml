@@ -31,8 +31,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/poto_profil"
-                android:src="@drawable/avatar" />
+                android:src="@drawable/default_avatar" />
 
             <EditText
                 android:id="@+id/profil_nama"
@@ -64,7 +63,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/field_merah"
-                android:hint="Tanggal Lahir"
+                android:hint="Tanggal Lahir (yyyy-MM-dd)"
                 android:padding="10dp" />
 
             <EditText
@@ -118,21 +117,11 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:background="@color/colorPrimary"
                 android:text="Simpan"
                 android:textColor="#fff"
                 android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/profil_btn_gantipass"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"
-                android:text="Ganti Password"
-                android:textColor="#fff" />
 
         </LinearLayout>
 

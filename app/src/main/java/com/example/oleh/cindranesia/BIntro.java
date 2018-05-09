@@ -29,7 +29,7 @@ public class BIntro extends AppIntro {
 
         addSlide(AppIntroFragment.newInstance("Pesan Cenderamata",
                 "Hanya dengan satu ketukan Anda dapat memesan cenderamata Indonesia.",
-                R.drawable.pesan,
+                R.drawable.pesan2,
                 Color.parseColor("#cc0004")));
 
         showStatusBar(false);

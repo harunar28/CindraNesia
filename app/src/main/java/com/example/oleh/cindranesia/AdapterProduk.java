@@ -58,11 +58,15 @@ public class AdapterProduk extends ArrayAdapter<ItemProduk> {
         holder.jenis_produk = (TextView) view.findViewById(R.id.jenis_produk);
         holder.gmb = (ImageView) view.findViewById(R.id.gambar);
 
-//        Picasso
-//                .with(activity)
-//                .load(semuaobj.getGambar().toString())
-//                .fit()
-//                .into(holder.gmb);
+        if(semuaobj.getGambar().toString().equals("")){
+            holder.gmb.setImageResource(R.drawable.default_produk_putih);
+        }else{
+            Picasso
+                    .with(activity)
+                    .load(semuaobj.getGambar().toString())
+                    .fit()
+                    .into(holder.gmb);
+        }
 
         holder.judul_produk.setText(semuaobj.getJudul_produk().toString());
         holder.nama_toko.setText(semuaobj.getNama_toko().toString());

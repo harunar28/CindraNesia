@@ -1,12 +1,14 @@
 package com.example.oleh.cindranesia;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -85,6 +87,22 @@ public class HEditProduk_Owner extends AppCompatActivity {
             }
         });
 
+        jenis_produk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(HEditProduk_Owner.this)
+                        .setTitle("Jenis Produk")
+                        .setItems(R.array.jenis, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                jenis_produk.setText(getResources().getStringArray(R.array.jenis)[which]);
+                            }
+                        })
+                        .show();
+            }
+        });
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +115,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
         });
 
         if(JsonUtils.isNetworkAvailable(HEditProduk_Owner.this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampileditproduk.php?id_produk="+id);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampileditproduk.php?id_produk="+id);
         }else{
             Toast.makeText(HEditProduk_Owner.this,"No Network Connection!!!",Toast.LENGTH_SHORT).show();
         }
@@ -241,7 +259,7 @@ public class HEditProduk_Owner extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/editproduk.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/editproduk.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_produk",id_produk));

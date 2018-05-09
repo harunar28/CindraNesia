@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +55,10 @@ public class FDetail_User extends AppCompatActivity {
     ImageView image;
     EditText ulasan,jmh;
     Button kirim,simpan,favorit;
+    Toolbar tb;
 
     String iduser,idproduk,idtoko;
-    String ulas;
+    String ulas,path;
 
     String Result;
 
@@ -63,6 +66,14 @@ public class FDetail_User extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fdetail__user);
+
+        //toolbar
+        tb = (Toolbar) findViewById(R.id.detai_user_tool);
+        setSupportActionBar(tb);
+
+        //back-toolbar
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         judul = (TextView)findViewById(R.id.detail_user_judul);
         desk = (TextView)findViewById(R.id.detail_user_deskripsi);
@@ -85,7 +96,7 @@ public class FDetail_User extends AppCompatActivity {
         idtoko = getIntent().getExtras().getString("idtoko");
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampildetail_user.php?id_produk="+idproduk);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampildetail_user.php?id_produk="+idproduk);
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -116,7 +127,7 @@ public class FDetail_User extends AppCompatActivity {
         arrayulasan = new String[allulasan.size()];
 
         if(JsonUtils.isNetworkAvailable(FDetail_User.this)){
-            new TampilUlasan().execute("http://10.10.100.4/cindranesia/tampilulasan.php?id_produk="+idproduk);
+            new TampilUlasan().execute("https://cindranesia.000webhostapp.com/tampilulasan.php?id_produk="+idproduk);
         }else{
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Failed")
@@ -154,13 +165,17 @@ public class FDetail_User extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 jumlah();
             }
         });
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
+    }
 
     private void jumlah(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -237,14 +252,17 @@ public class FDetail_User extends AppCompatActivity {
                         kota.setText(JsonObj.getString("kota_toko"));
                         arah.setText(JsonObj.getString("arah"));
                         harga.setText(JsonObj.getString("harga_produk"));
+                        path = JsonObj.getString("path");
 
-//                        String path = JsonObj.getString("path");
-//
-//                        Picasso
-//                                .with(FDetail_User.this)
-//                                .load(path)
-//                                .fit()
-//                                .into(image);
+                        if(path.equals("")){
+                            image.setImageResource(R.drawable.default_avatar);
+                        }else{
+                            Picasso
+                                    .with(FDetail_User.this)
+                                    .load(path)
+                                    .fit()
+                                    .into(image);
+                        }
 
                     }
 
@@ -368,7 +386,7 @@ public class FDetail_User extends AppCompatActivity {
         if (HasilProses.trim().equalsIgnoreCase("OK")) {
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Succes")
-                    .setMessage("Barang disimpan di keranjang!")
+                    .setMessage("Produk disimpan ke keranjang!")
                     .setCancelable(false)
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -387,7 +405,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahkeranjang.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahkeranjang.php");
         try {
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user", iduser));
@@ -436,7 +454,7 @@ public class FDetail_User extends AppCompatActivity {
         if(HasilProses.trim().equalsIgnoreCase("OK")){
             new AlertDialog.Builder(FDetail_User.this)
                     .setTitle("Succes")
-                    .setMessage("Ulasan Berhasil Disimpan!")
+                    .setMessage("Produk disimpan ke favorit!")
                     .setCancelable(false)
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -456,7 +474,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahfavorit.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahfavorit.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",iduser));
@@ -524,7 +542,7 @@ public class FDetail_User extends AppCompatActivity {
         String result = "";
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost("http://10.10.100.4/cindranesia/tambahulasan.php");
+        HttpPost request = new HttpPost("https://cindranesia.000webhostapp.com/tambahulasan.php");
         try{
             List<NameValuePair> nvp = new ArrayList<NameValuePair>(6);
             nvp.add(new BasicNameValuePair("id_user",iduser));

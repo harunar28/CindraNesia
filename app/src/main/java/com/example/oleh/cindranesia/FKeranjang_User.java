@@ -1,6 +1,7 @@
 package com.example.oleh.cindranesia;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
@@ -30,6 +32,7 @@ public class FKeranjang_User extends AppCompatActivity {
     ProgressBar progress;
     Toolbar tb;
     String id;
+    Button pesan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class FKeranjang_User extends AppCompatActivity {
         arraygambar = new String[allgambar.size()];
 
         if(JsonUtils.isNetworkAvailable(this)){
-            new Tampil().execute("http://10.10.100.4/cindranesia/tampilkeranjang.php?id_user="+id);
+            new Tampil().execute("https://cindranesia.000webhostapp.com/tampilkeranjang.php?id_user="+id);
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Failed")
@@ -91,6 +94,24 @@ public class FKeranjang_User extends AppCompatActivity {
 //                Intent a = new Intent(DataPasien.this ,DetailPasien.class);
 //                a.putExtra("idpasien",ide);
 //                startActivity(a);
+            }
+        });
+
+        pesan = (Button)findViewById(R.id.keranjang_user_btnPesan);
+        pesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(FKeranjang_User.this)
+                        .setTitle("Succes")
+                        .setMessage("Pemesanan sedang di proses, harap tunggu!")
+                        .setCancelable(false)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(FKeranjang_User.this, EMenu_Drawer.class));
+                            }
+                        }).show();
             }
         });
     }
@@ -124,8 +145,8 @@ public class FKeranjang_User extends AppCompatActivity {
 
             if(null == hasil || hasil.length() == 0){
                 new AlertDialog.Builder(FKeranjang_User.this)
-                        .setTitle("Failed")
-                        .setMessage("Harap Periksa Koneksi!")
+                        .setTitle("Pesan")
+                        .setMessage("Maaf Anda belum memilih produk!")
                         .setCancelable(false)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override

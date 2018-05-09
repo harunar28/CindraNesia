@@ -29,9 +29,9 @@
                 android:id="@+id/tambah_produk_img"
                 android:layout_width="330dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/bakpia" />
+                android:layout_marginTop="20dp"
+                android:src="@drawable/default_produk" />
 
             <EditText
                 android:id="@+id/tambah_produk_jenis"
@@ -83,9 +83,9 @@
                 android:id="@+id/tambah_produk_btnsimpan"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"
                 android:text="Simpan"

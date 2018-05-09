@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.oleh.cindranesia.HEdit_produk">
+    tools:context="com.example.oleh.cindranesia.HEditProduk_Owner">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/edit_produk_tool"
@@ -29,9 +29,9 @@
                 android:id="@+id/edit_produk_img"
                 android:layout_width="330dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:src="@drawable/bakpia" />
+                android:layout_marginTop="20dp"
+                android:src="@drawable/default_produk" />
 
             <EditText
                 android:id="@+id/edit_produk_jenis"
@@ -41,6 +41,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/field_merah"
+                android:cursorVisible="false"
                 android:hint="Jenis Produk"
                 android:padding="10dp" />
 
@@ -82,9 +83,9 @@
                 android:id="@+id/edit_produk_btnedit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"
                 android:text="Edit"
